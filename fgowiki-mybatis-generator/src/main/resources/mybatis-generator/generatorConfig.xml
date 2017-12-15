@@ -15,10 +15,10 @@
             <property name="javaFileEncoding" value="UTF-8"/>
         </commentGenerator>
 
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://127.0.0.1:3306/fgowiki"
-                        userId="root"
-                        password="123456">
+        <jdbcConnection driverClass="oracle.jdbc.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+                        userId="JIANG"
+                        password="123">
         </jdbcConnection>
 
         <javaTypeResolver >

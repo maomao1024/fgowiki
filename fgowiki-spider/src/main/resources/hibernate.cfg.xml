@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE hibernate-configuration PUBLIC
-        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
-        "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+		"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="hibernate.bytecode.use_reflection_optimizer">
-      false
-    </property>
-    <property name="hibernate.connection.driver_class">
-      com.mysql.jdbc.Driver
-    </property>
-    <property name="connection.url">jdbc:mysql://127.0.0.1:3306/fgowiki</property>
-    <property name="connection.username">root</property>
-    <property name="connection.password">123456</property>
-    <property name="hibernate.dialect">
-      org.hibernate.dialect.MySQL5Dialect
-    </property>
-    <property name="hibernate.search.autoregister_listeners">
-      false
-    </property>
-    <property name="hibernate.show_sql">true</property>
+	<session-factory>
+		<property name="connection.username">JIANG</property>
+		<property name="connection.password">123</property>
+		<property name="hibernate.bytecode.use_reflection_optimizer">
+			false
+		</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+		<property name="connection.url">jdbc:oracle:thin:@localhost:1521:orcl</property>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.Oracle10gDialect
+		</property>
+		<property name="hibernate.search.autoregister_listeners">
+			false
+		</property>
+		<property name="hibernate.show_sql">true</property>
 
-    <!-- 映射类 -->
-    <mapping class="com.github.fgowiki.spider.model.FgoMaterial"/>
-    <mapping class="com.github.fgowiki.spider.model.FgoServant"/>
+		<!-- 映射类 -->
+		<!-- 映射类 -->
+		<mapping class="com.github.fgowiki.spider.model.FgoMaterial"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoServant"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoCamp"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoClass"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoNoblePhantasmInfo"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoServantClassSkill"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoServantMaterial"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoServantNoblePhantasm"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoServantSkill"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoServantStory"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoServantVoice"/>
+		<mapping class="com.github.fgowiki.spider.model.FgoSkillInfo"/>
 
-  </session-factory>
+	</session-factory>
 </hibernate-configuration>

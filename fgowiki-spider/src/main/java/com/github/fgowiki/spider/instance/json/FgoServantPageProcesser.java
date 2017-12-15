@@ -61,7 +61,7 @@ public class FgoServantPageProcesser extends FgoJsonPage {
          name_en	mekaerichan Ⅱ
          */
         FgoServant servant = new FgoServant();
-        servant.setAtkStage0(data.getInteger("image"));
+        servant.setAtkStage0(data.getInteger("lv1_atk"));
         servant.setHpStage0(data.getInteger("lv1_hp"));
         servant.setAtkStage4(data.getInteger("lvmax4_atk"));
         servant.setHpStage4(data.getInteger("lvmax4_hp"));
@@ -74,7 +74,7 @@ public class FgoServantPageProcesser extends FgoJsonPage {
             // FIXME 仍然有问题
             s = s.trim().replaceAll("Ⅰ", "").replaceAll("Ⅱ ", "").replaceAll("Ⅲ", "");
             FgoClazz fgoClazz = FgoClazz.getClazz(s);
-            servant.setClazz(fgoClazz == null ? null : fgoClazz.getId());
+            servant.setClazz(fgoClazz == null ? 0 : fgoClazz.getId());
         }
         servant.setNameEn(data.getString("name_en"));
         HibernateUtil.add(servant);
