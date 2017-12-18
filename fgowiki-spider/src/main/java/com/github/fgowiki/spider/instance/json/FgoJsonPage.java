@@ -31,6 +31,8 @@ public abstract class FgoJsonPage implements PageProcessor {
             datas.forEach((data -> saveData((JSONObject) data)));
             pageNumber++;
             page.addTargetRequest(this.getNextRequest());
+        }else{
+            this.callback();
         }
         System.out.println("=====================================================");
     }
@@ -68,5 +70,10 @@ public abstract class FgoJsonPage implements PageProcessor {
      * @param data
      */
     abstract void saveData(JSONObject data);
+
+    protected void callback(){
+
+    }
+
 
 }

@@ -50,8 +50,7 @@ public class FgoServantPageProcesser implements PageProcessor {
 	}
 
 	public void saveData(JSONObject data) {
-		map.put(data.getString("Attributes"),"");
-		/*FgoServant servant = (FgoServant) HibernateUtil.get(FgoServant.class, data.getInteger("ID"));
+		FgoServant servant = (FgoServant) HibernateUtil.get(FgoServant.class, data.getInteger("ID"));
 		if (servant != null) {
 			String campStr = data.getString("Camp");
 			Integer camp = FgoCamp.getCamp(campStr);
@@ -84,7 +83,7 @@ public class FgoServantPageProcesser implements PageProcessor {
 			servant.setPainter(painter);
 			servant.setCv(cv);
 
-		}*/
+		}
 	}
 
 	@Override

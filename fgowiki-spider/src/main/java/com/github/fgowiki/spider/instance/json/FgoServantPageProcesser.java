@@ -21,6 +21,8 @@ public class FgoServantPageProcesser extends FgoJsonPage {
     private Site site = Site.me().setRetryTimes(0).setSleepTime(1000);
 
     private static Map<String, String> feilds = new HashMap<>();
+    private static Map<Integer, JSONObject> unresolved = new HashMap<>();
+
 
     static {
         feilds.put("id", "id");
@@ -75,9 +77,17 @@ public class FgoServantPageProcesser extends FgoJsonPage {
             s = s.trim().replaceAll("Ⅰ", "").replaceAll("Ⅱ ", "").replaceAll("Ⅲ", "");
             FgoClazz fgoClazz = FgoClazz.getClazz(s);
             servant.setClazz(fgoClazz == null ? 0 : fgoClazz.getId());
+            if (fgoClazz == null) {
+                unresolved.put(servant.getId(), data);
+            }
         }
         servant.setNameEn(data.getString("name_en"));
         HibernateUtil.add(servant);
+    }
+
+    @Override
+    protected void callback() {
+        unresolved.forEach((key,value)-> System.out.println(key+":"+value.toJSONString()));
     }
 
     @Override

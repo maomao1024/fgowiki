@@ -1,5 +1,3 @@
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (0, '其他', 'Other');
 
 insert into FGO_CLASS (ID, NAME, NAME_EN)
 values (1, '盾', 'Shielder');
@@ -32,11 +30,18 @@ insert into FGO_CLASS (ID, NAME, NAME_EN)
 values (10, '复仇者', 'Avenger');
 
 insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (11, '小丑', 'Alterego');
+values (11, '冠位魔术师', 'Grand Caster');
 
 insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (12, '月蚀', 'Moon Cancer');
+values (12, '小丑', 'Alterego');
 
 insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (13, '兽', 'Beast');
+values (13, '月蚀', 'Moon Cancer');
+
+insert into FGO_CLASS (ID, NAME, NAME_EN)
+values (14, '兽', 'Beast');
+
+insert into FGO_CLASS (ID, NAME, NAME_EN)
+values (15, '异域者', 'Foreigner');
+
 
