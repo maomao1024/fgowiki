@@ -25,8 +25,9 @@ public class FgoServant {
     @Column(name = "NAME_JP")
     private String nameJp;
     private String nickname;
-    @Column(name = "CLASS")
-    private Integer clazz;
+    @OneToOne
+    @JoinColumn(name="CLASS")
+    private FgoClass clazz;
     private Integer star;
     private Integer camp;
     @Column(name = "ATK_STAGE0")

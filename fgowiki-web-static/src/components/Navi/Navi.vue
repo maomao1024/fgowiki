@@ -70,8 +70,8 @@
             handleSelect(key, keyPath){
                 switch(key){
                     case '1':
-                        this.$router.push('/Page1');
-                        this.breadcrumbItems  = ['导航一'];
+                        this.$router.push('/Servant');
+                        this.breadcrumbItems  = ['英灵信息'];
                         break;
                     case '2':
                         this.$router.push('/Page2');

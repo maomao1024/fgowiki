@@ -37,7 +37,7 @@ public abstract class BaseService<T, ID extends Serializable> {
     /**
      * 获取分页数据
      *
-     * @param pageNum  当眼页
+     * @param pageNum  当前页
      * @param pageSize 分页大小，默认10
      * @param sorts    排序字段 key为排序的字段，value为排序方式，取值为Sort.Direction枚举
      * @return 分页数据
