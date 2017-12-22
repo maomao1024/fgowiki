@@ -1,4 +1,4 @@
-package com.github.fgowiki.api.core;
+package com.github.fgowiki.core.dao;
 
 
 import org.springframework.data.repository.NoRepositoryBean;

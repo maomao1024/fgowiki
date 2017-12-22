@@ -1,4 +1,4 @@
-package com.github.fgowiki.api.domain;
+package com.github.fgowiki.api.entity;
 
 import lombok.Data;
 

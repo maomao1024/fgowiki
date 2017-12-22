@@ -1,4 +1,4 @@
-package com.github.fgowiki.api.domain;
+package com.github.fgowiki.api.entity;
 
 import lombok.Data;
 import javax.persistence.*;
@@ -22,6 +22,5 @@ public class FgoMaterial {
     private Integer box;
     private String description;
     private String location;
-
 
 }

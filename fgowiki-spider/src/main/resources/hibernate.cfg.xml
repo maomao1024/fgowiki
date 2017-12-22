@@ -33,19 +33,19 @@
 		<mapping class="com.github.fgowiki.spider.model.FgoServantStory"/>
 		<mapping class="com.github.fgowiki.spider.model.FgoServantVoice"/>
 		<mapping class="com.github.fgowiki.spider.model.FgoSkillInfo"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoAttribute"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoCamp"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoClass"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoMaterial"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoNoblePhantasmInfo"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoServant"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoServantClassSkill"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoServantMaterial"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoServantNoblePhantasm"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoServantSkill"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoServantStory"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoServantVoice"/>
-        <mapping class="com.github.fgowiki.api.domain.FgoSkillInfo"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoAttribute"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoCamp"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoClass"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoMaterial"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoNoblePhantasmInfo"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoServant"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoServantClassSkill"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoServantMaterial"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoServantNoblePhantasm"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoServantSkill"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoServantStory"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoServantVoice"/>
+        <mapping class="com.github.fgowiki.api.entity.FgoSkillInfo"/>
 
     </session-factory>
 </hibernate-configuration>

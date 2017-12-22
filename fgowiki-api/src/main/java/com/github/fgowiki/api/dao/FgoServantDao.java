@@ -1,7 +1,7 @@
 package com.github.fgowiki.api.dao;
 
-import com.github.fgowiki.api.core.BaseDao;
-import com.github.fgowiki.api.domain.FgoServant;
+import com.github.fgowiki.api.entity.FgoServant;
+import com.github.fgowiki.core.dao.BaseDao;
 
 /**
  * 功能描述：

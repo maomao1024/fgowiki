@@ -1,9 +1,9 @@
 package com.github.fgowiki.api.service;
 
-import com.github.fgowiki.api.core.BaseDao;
-import com.github.fgowiki.api.core.BaseService;
 import com.github.fgowiki.api.dao.FgoServantDao;
-import com.github.fgowiki.api.domain.FgoServant;
+import com.github.fgowiki.api.entity.FgoServant;
+import com.github.fgowiki.core.dao.BaseDao;
+import com.github.fgowiki.core.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
