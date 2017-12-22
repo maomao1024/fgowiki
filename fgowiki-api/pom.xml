@@ -6,20 +6,40 @@
     <groupId>fgowiki</groupId>
     <artifactId>fgowiki-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
     <!-- Spring Boot 启动父依赖 -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.1.RELEASE</version>
+        <version>1.5.8.RELEASE</version>
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
 
     <properties>
-        <mybatis-spring-boot>1.2.0</mybatis-spring-boot>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
         <oracle-connector>11.2.0.1.0</oracle-connector>
     </properties>
 
     <dependencies>
+        <!-- 更新代码自动重启 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>fgowiki</groupId>
+            <artifactId>fgowiki-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
 
         <!-- Spring Boot Web 依赖 -->
         <dependency>
@@ -34,18 +54,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Boot Mybatis 依赖 -->
-        <dependency>
-            <groupId>org.mybatis.spring.boot</groupId>
-            <artifactId>mybatis-spring-boot-starter</artifactId>
-            <version>${mybatis-spring-boot}</version>
-        </dependency>
-
         <!-- oracle 连接驱动依赖 -->
         <dependency>
-	        <groupId>com.oracle</groupId>
-	        <artifactId>ojdbc6</artifactId>
-	        <version>${oracle-connector}</version>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>${oracle-connector}</version>
         </dependency>
 
         <!-- Junit -->
@@ -55,23 +68,20 @@
             <version>4.12</version>
         </dependency>
 
-        <!--分页插件-->
         <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-            <version>1.0.0</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.10</version>
         </dependency>
+
     </dependencies>
+
 
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                </configuration>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

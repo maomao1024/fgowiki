@@ -1,9 +1,12 @@
-package com.github.fgowiki.web.controller;
+package com.github.fgowiki.api.controller;
 
-import com.github.fgowiki.web.domain.FgoServant;
-import com.github.fgowiki.web.service.FgoServantService;
-import com.github.pagehelper.PageInfo;
+import com.github.fgowiki.api.domain.FgoServant;
+import com.github.fgowiki.api.service.FgoServantService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,11 +25,15 @@ public class FgoServantController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public FgoServant getServant(@PathVariable("userId") String userId) {
-        return service.get(userId);
+        //return service.get(userId);
+        return null;
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public PageInfo<FgoServant> getServantList(Integer pageNum, Integer pageSize) {
-        return service.getList(pageNum, pageSize, null);
+    public Page<FgoServant> getServantList(Integer pageNum, Integer pageSize) {
+        Order idOrder = new Order(Sort.Direction.ASC, "id");
+        Sort sort = new Sort(idOrder);
+        PageRequest pageRequest=new PageRequest(pageNum,pageSize,sort);
+        return service.getList(pageRequest);
     }
 }

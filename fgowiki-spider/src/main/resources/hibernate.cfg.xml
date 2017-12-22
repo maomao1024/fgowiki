@@ -33,6 +33,19 @@
 		<mapping class="com.github.fgowiki.spider.model.FgoServantStory"/>
 		<mapping class="com.github.fgowiki.spider.model.FgoServantVoice"/>
 		<mapping class="com.github.fgowiki.spider.model.FgoSkillInfo"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoAttribute"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoCamp"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoClass"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoMaterial"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoNoblePhantasmInfo"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoServant"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoServantClassSkill"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoServantMaterial"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoServantNoblePhantasm"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoServantSkill"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoServantStory"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoServantVoice"/>
+        <mapping class="com.github.fgowiki.api.domain.FgoSkillInfo"/>
 
-	</session-factory>
+    </session-factory>
 </hibernate-configuration>
