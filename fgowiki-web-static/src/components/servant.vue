@@ -54,7 +54,7 @@
                 ).then(function (res) {
                     let data = res.data;
                     obj.servantInfo = data.content;
-                    obj.servantInfo.forEach(o => o.image = 'http://127.0.0.1:8010/static/img/servant/head/'+('000'+o.id).substr(-3)+'.jpg');
+                    obj.servantInfo.forEach(o => o.image = '/static/img/servant/head/'+('000'+o.id).substr(-3)+'.jpg');
                     obj.pageNum = data.number + 1;
                     obj.pageSize = data.size;
                     obj.toatlSize = data.totalElements;
