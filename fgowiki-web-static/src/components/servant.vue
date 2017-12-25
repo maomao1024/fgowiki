@@ -56,7 +56,6 @@
                     obj.servantInfo = data.content;
                     obj.servantInfo.forEach(o => o.image = '/static/img/servant/head/'+('000'+o.id).substr(-3)+'.jpg');
                     obj.pageNum = data.number + 1;
-                    obj.pageSize = data.size;
                     obj.toatlSize = data.totalElements;
                 }).catch(function (err) {
                     console.log(err)
@@ -75,7 +74,7 @@
             return {
                 servantInfo: [],
                 pageNum: 1,
-                pageSize: 15,
+                pageSize: 10,
                 toatlSize: -1
             };
         },
