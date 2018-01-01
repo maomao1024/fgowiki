@@ -13,8 +13,6 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-@Table(name = "FGO_CAMP")
-@SuppressWarnings("unused")
 public class FgoCamp {
     @Id
     private Integer id;

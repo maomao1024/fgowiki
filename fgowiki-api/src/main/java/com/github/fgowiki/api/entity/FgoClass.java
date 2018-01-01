@@ -11,13 +11,10 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-@Table(name = "FGO_CLASS")
-@SuppressWarnings("unused")
 public class FgoClass {
     @Id
     private Integer id;
     private String name;
-    @Column(name = "NAME_EN")
     private String nameEn;
 
 

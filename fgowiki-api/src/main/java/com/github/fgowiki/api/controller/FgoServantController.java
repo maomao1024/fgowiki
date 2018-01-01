@@ -20,9 +20,9 @@ public class FgoServantController {
     @Autowired
     private FgoServantService service;
 
-    @RequestMapping(value = "/{servant}", method = RequestMethod.GET)
-    public FgoServant getServant(@PathVariable("servant") Integer userId) {
-        return service.get(userId);
+    @RequestMapping(value = "/{servantId}", method = RequestMethod.GET)
+    public FgoServant getServant(@PathVariable("servantId") Integer servantId) {
+        return service.get(servantId);
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

@@ -1,6 +1,7 @@
 package com.github.fgowiki.core.dao;
 
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -11,6 +12,6 @@ import java.io.Serializable;
  * @create 2017-12-10 21:27
  **/
 @NoRepositoryBean
-public interface BaseDao<T,ID extends Serializable> extends PagingAndSortingRepository<T,ID> {
+public interface BaseDao<T,ID extends Serializable> extends JpaRepository<T,ID> {
 
 }

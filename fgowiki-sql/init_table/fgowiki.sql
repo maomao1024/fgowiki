@@ -9,8 +9,8 @@
 /*==============================================================*/
 CREATE TABLE FGO_ATTRIBUTE
 (
-  ID                   VARCHAR2(2)          NOT NULL,
-  NAME                 VARCHAR2(64)
+  ID   VARCHAR2(2) NOT NULL,
+  NAME VARCHAR2(64)
 );
 
 COMMENT ON TABLE FGO_ATTRIBUTE IS
@@ -30,8 +30,8 @@ ALTER TABLE FGO_ATTRIBUTE
 /*==============================================================*/
 CREATE TABLE FGO_CAMP
 (
-  ID                   INTEGER              NOT NULL,
-  NAME                 VARCHAR2(32)
+  ID   INTEGER NOT NULL,
+  NAME VARCHAR2(32)
 );
 
 COMMENT ON TABLE FGO_CAMP IS
@@ -51,9 +51,9 @@ ALTER TABLE FGO_CAMP
 /*==============================================================*/
 CREATE TABLE FGO_CLASS
 (
-  ID                   INTEGER              NOT NULL,
-  NAME                 VARCHAR2(32),
-  NAME_EN              VARCHAR2(32)
+  ID      INTEGER NOT NULL,
+  NAME    VARCHAR2(32),
+  NAME_EN VARCHAR2(32)
 );
 
 COMMENT ON TABLE FGO_CLASS IS
@@ -76,12 +76,12 @@ ALTER TABLE FGO_CLASS
 /*==============================================================*/
 CREATE TABLE FGO_MATERIAL
 (
-  ID                   INTEGER              NOT NULL,
-  NAME                 VARCHAR2(64),
-  TYPE                 INTEGER,
-  BOX                  INTEGER,
-  DESCRIPTION          VARCHAR2(512),
-  LOCATION             VARCHAR2(512)
+  ID          INTEGER NOT NULL,
+  NAME        VARCHAR2(64),
+  TYPE        INTEGER,
+  BOX         INTEGER,
+  DESCRIPTION VARCHAR2(512),
+  LOCATION    VARCHAR2(512)
 );
 
 COMMENT ON TABLE FGO_MATERIAL IS
@@ -113,14 +113,14 @@ ALTER TABLE FGO_MATERIAL
 /*==============================================================*/
 CREATE TABLE FGO_NOBLE_PHANTASM_INFO
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  DESCRIPTION          VARCHAR2(256),
-  STAGE1               NUMBER(6,2),
-  STAGE2               NUMBER(6,2),
-  STAGE3               NUMBER(6,2),
-  STAGE4               NUMBER(6,2),
-  STAGE5               NUMBER(6,2),
-  TYPE                 INTEGER
+  ID          VARCHAR2(32) NOT NULL,
+  DESCRIPTION VARCHAR2(256),
+  STAGE1      NUMBER(6, 2),
+  STAGE2      NUMBER(6, 2),
+  STAGE3      NUMBER(6, 2),
+  STAGE4      NUMBER(6, 2),
+  STAGE5      NUMBER(6, 2),
+  TYPE        INTEGER
 );
 
 COMMENT ON TABLE FGO_NOBLE_PHANTASM_INFO IS
@@ -158,42 +158,42 @@ ALTER TABLE FGO_NOBLE_PHANTASM_INFO
 /*==============================================================*/
 CREATE TABLE FGO_SERVANT
 (
-  ID                   INTEGER              NOT NULL,
-  NAME_ZH              VARCHAR2(64),
-  NAME_EN              VARCHAR2(64),
-  NAME_JP              VARCHAR2(64),
-  NICKNAME             VARCHAR2(256),
-  CLASS                INTEGER,
-  STAR                 INTEGER,
-  CAMP                 INTEGER,
-  ATK_STAGE0           INTEGER,
-  HP_STAGE0            INTEGER,
-  CARDS                VARCHAR2(5),
-  ATK_STAGE4           INTEGER,
-  HP_STAGE4            INTEGER,
-  ATK_LV_90            INTEGER,
-  HP_LV_90             INTEGER,
-  ATK_LV_100           INTEGER,
-  HP_LV_100            INTEGER,
-  ART_HIT              INTEGER,
-  BUSTER_HIT           INTEGER,
-  QUICK_HIT            INTEGER,
-  EXTRA_HIT            INTEGER,
-  CRIT                 INTEGER,
-  CRIT_STAR            NUMBER(5,4),
-  NP_RATE_ART          NUMBER(5,4),
-  NP_RATE_BUSTER       NUMBER(5,4),
-  NP_RATE_QUICK        NUMBER(5,4),
-  NP_RATE_EXTRA        NUMBER(5,4),
-  NP_RATE_ATTACKED     NUMBER(5,4),
-  GENDER               INTEGER,
-  REGION               VARCHAR2(64),
-  ATTRIBUTES           VARCHAR2(64),
-  PAINTER              VARCHAR2(64),
-  CV                   VARCHAR2(64),
-  HEIGHT               INTEGER,
-  WEIGHT               INTEGER,
-  ORIGIN               VARCHAR2(128)
+  ID               INTEGER NOT NULL,
+  NAME_ZH          VARCHAR2(64),
+  NAME_EN          VARCHAR2(64),
+  NAME_JP          VARCHAR2(64),
+  NICKNAME         VARCHAR2(256),
+  CLASS            INTEGER,
+  STAR             INTEGER,
+  CAMP             INTEGER,
+  ATK_STAGE0       INTEGER,
+  HP_STAGE0        INTEGER,
+  CARDS            VARCHAR2(5),
+  ATK_STAGE4       INTEGER,
+  HP_STAGE4        INTEGER,
+  ATK_LV90         INTEGER,
+  HP_LV90          INTEGER,
+  ATK_LV100        INTEGER,
+  HP_LV100         INTEGER,
+  ART_HIT          INTEGER,
+  BUSTER_HIT       INTEGER,
+  QUICK_HIT        INTEGER,
+  EXTRA_HIT        INTEGER,
+  CRIT             INTEGER,
+  CRIT_STAR        NUMBER(5, 4),
+  NP_RATE_ART      NUMBER(5, 4),
+  NP_RATE_BUSTER   NUMBER(5, 4),
+  NP_RATE_QUICK    NUMBER(5, 4),
+  NP_RATE_EXTRA    NUMBER(5, 4),
+  NP_RATE_ATTACKED NUMBER(5, 4),
+  GENDER           INTEGER,
+  REGION           VARCHAR2(64),
+  ATTRIBUTES       VARCHAR2(64),
+  PAINTER          VARCHAR2(64),
+  CV               VARCHAR2(64),
+  HEIGHT           INTEGER,
+  WEIGHT           INTEGER,
+  ORIGIN           VARCHAR2(128)
 );
 
 COMMENT ON TABLE FGO_SERVANT IS
@@ -238,16 +238,16 @@ COMMENT ON COLUMN FGO_SERVANT.ATK_STAGE4 IS
 COMMENT ON COLUMN FGO_SERVANT.HP_STAGE4 IS
 '灵基4阶段HP';
 
-COMMENT ON COLUMN FGO_SERVANT.ATK_LV_90 IS
+COMMENT ON COLUMN FGO_SERVANT.ATK_LV90 IS
 '90级ATK';
 
-COMMENT ON COLUMN FGO_SERVANT.HP_LV_90 IS
+COMMENT ON COLUMN FGO_SERVANT.HP_LV90 IS
 '90级HP';
 
-COMMENT ON COLUMN FGO_SERVANT.ATK_LV_100 IS
+COMMENT ON COLUMN FGO_SERVANT.ATK_LV100 IS
 '100级_ATK';
 
-COMMENT ON COLUMN FGO_SERVANT.HP_LV_100 IS
+COMMENT ON COLUMN FGO_SERVANT.HP_LV100 IS
 '100级_HP';
 
 COMMENT ON COLUMN FGO_SERVANT.ART_HIT IS
@@ -315,12 +315,12 @@ ALTER TABLE FGO_SERVANT
 /*==============================================================*/
 CREATE TABLE FGO_SERVANT_CLASS_SKILL
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  SERVANT_ID           INTEGER,
-  NAME                 VARCHAR2(32),
-  "LEVEL"              VARCHAR2(8),
-  INFO_ID              VARCHAR2(32),
-  SID                  INTEGER
+  ID         VARCHAR2(32) NOT NULL,
+  SERVANT_ID INTEGER,
+  NAME       VARCHAR2(32),
+  "LEVEL"    VARCHAR2(8),
+  INFO_ID    VARCHAR2(32),
+  SID        INTEGER
 );
 
 COMMENT ON TABLE FGO_SERVANT_CLASS_SKILL IS
@@ -352,13 +352,13 @@ ALTER TABLE FGO_SERVANT_CLASS_SKILL
 /*==============================================================*/
 CREATE TABLE FGO_SERVANT_MATERIAL
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  SERVANT_ID           INTEGER,
-  SID                  INTEGER,
-  "LEVEL"              INTEGER,
-  COUNT                INTEGER,
-  QP                   INTEGER,
-  TYPE                 INTEGER
+  ID         VARCHAR2(32) NOT NULL,
+  SERVANT_ID INTEGER,
+  SID        INTEGER,
+  "LEVEL"    INTEGER,
+  COUNT      INTEGER,
+  QP         INTEGER,
+  TYPE       INTEGER
 );
 
 COMMENT ON TABLE FGO_SERVANT_MATERIAL IS
@@ -393,12 +393,12 @@ ALTER TABLE FGO_SERVANT_MATERIAL
 /*==============================================================*/
 CREATE TABLE FGO_SERVANT_NOBLE_PHANTASM
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  SERVANT_ID           INTEGER,
-  NAME                 VARCHAR2(32),
-  NAME_EN              VARCHAR2(32),
-  "LEVEL"              VARCHAR2(8),
-  INFO_ID              VARCHAR2(32)
+  ID         VARCHAR2(32) NOT NULL,
+  SERVANT_ID INTEGER,
+  NAME       VARCHAR2(32),
+  NAME_EN    VARCHAR2(32),
+  "LEVEL"    VARCHAR2(8),
+  INFO_ID    VARCHAR2(32)
 );
 
 COMMENT ON TABLE FGO_SERVANT_NOBLE_PHANTASM IS
@@ -430,11 +430,11 @@ ALTER TABLE FGO_SERVANT_NOBLE_PHANTASM
 /*==============================================================*/
 CREATE TABLE FGO_SERVANT_SKILL
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  SERVANT_ID           INTEGER,
-  NAME                 VARCHAR2(32),
-  "LEVEL"              VARCHAR2(8),
-  INFO_ID              VARCHAR2(32)
+  ID         VARCHAR2(32) NOT NULL,
+  SERVANT_ID INTEGER,
+  NAME       VARCHAR2(32),
+  "LEVEL"    VARCHAR2(8),
+  INFO_ID    VARCHAR2(32)
 );
 
 COMMENT ON TABLE FGO_SERVANT_SKILL IS
@@ -463,11 +463,11 @@ ALTER TABLE FGO_SERVANT_SKILL
 /*==============================================================*/
 CREATE TABLE FGO_SERVANT_STORY
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  SERVANT_ID           INTEGER,
-  SID                  INTEGER,
-  NAME                 VARCHAR2(32),
-  DESCRIPTION          VARCHAR2(8)
+  ID          VARCHAR2(32) NOT NULL,
+  SERVANT_ID  INTEGER,
+  SID         INTEGER,
+  NAME        VARCHAR2(32),
+  DESCRIPTION VARCHAR2(8)
 );
 
 COMMENT ON TABLE FGO_SERVANT_STORY IS
@@ -496,12 +496,12 @@ ALTER TABLE FGO_SERVANT_STORY
 /*==============================================================*/
 CREATE TABLE FGO_SERVANT_VOICE
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  SERVANT_ID           INTEGER,
-  SID                  INTEGER,
-  NAME                 VARCHAR2(32),
-  DESCRIPTION          VARCHAR2(8),
-  TYPE                 INTEGER
+  ID          VARCHAR2(32) NOT NULL,
+  SERVANT_ID  INTEGER,
+  SID         INTEGER,
+  NAME        VARCHAR2(32),
+  DESCRIPTION VARCHAR2(8),
+  TYPE        INTEGER
 );
 
 COMMENT ON TABLE FGO_SERVANT_VOICE IS
@@ -533,10 +533,10 @@ ALTER TABLE FGO_SERVANT_VOICE
 /*==============================================================*/
 CREATE TABLE FGO_SKILL_INFO
 (
-  ID                   VARCHAR2(32)         NOT NULL,
-  DESCRIPTION          VARCHAR2(256),
-  VALUE                NUMBER(6,2),
-  GROWTH               NUMBER(6,2)
+  ID          VARCHAR2(32) NOT NULL,
+  DESCRIPTION VARCHAR2(256),
+  VALUE       NUMBER(6, 2),
+  GROWTH      NUMBER(6, 2)
 );
 
 COMMENT ON TABLE FGO_SKILL_INFO IS

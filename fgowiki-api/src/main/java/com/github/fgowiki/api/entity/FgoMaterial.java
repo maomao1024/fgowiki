@@ -12,8 +12,6 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-@Table(name = "FGO_MATERIAL")
-@SuppressWarnings("unused")
 public class FgoMaterial {
     @Id
     private Integer id;
