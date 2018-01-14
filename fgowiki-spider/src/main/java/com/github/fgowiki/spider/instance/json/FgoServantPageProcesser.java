@@ -21,6 +21,8 @@ public class FgoServantPageProcesser extends FgoJsonPage {
     private Site site = Site.me().setRetryTimes(0).setSleepTime(1000);
 
     private static Map<String, String> feilds = new HashMap<>();
+    private static Map<Integer, JSONObject> unresolved = new HashMap<>();
+
 
     static {
         feilds.put("id", "id");
@@ -61,7 +63,7 @@ public class FgoServantPageProcesser extends FgoJsonPage {
          name_en	mekaerichan Ⅱ
          */
         FgoServant servant = new FgoServant();
-        servant.setAtkStage0(data.getInteger("image"));
+        servant.setAtkStage0(data.getInteger("lv1_atk"));
         servant.setHpStage0(data.getInteger("lv1_hp"));
         servant.setAtkStage4(data.getInteger("lvmax4_atk"));
         servant.setHpStage4(data.getInteger("lvmax4_hp"));
@@ -74,10 +76,18 @@ public class FgoServantPageProcesser extends FgoJsonPage {
             // FIXME 仍然有问题
             s = s.trim().replaceAll("Ⅰ", "").replaceAll("Ⅱ ", "").replaceAll("Ⅲ", "");
             FgoClazz fgoClazz = FgoClazz.getClazz(s);
-            servant.setClazz(fgoClazz == null ? null : fgoClazz.getId());
+            servant.setClazz(fgoClazz == null ? 0 : fgoClazz.getId());
+            if (fgoClazz == null) {
+                unresolved.put(servant.getId(), data);
+            }
         }
         servant.setNameEn(data.getString("name_en"));
         HibernateUtil.add(servant);
+    }
+
+    @Override
+    protected void callback() {
+        unresolved.forEach((key,value)-> System.out.println(key+":"+value.toJSONString()));
     }
 
     @Override

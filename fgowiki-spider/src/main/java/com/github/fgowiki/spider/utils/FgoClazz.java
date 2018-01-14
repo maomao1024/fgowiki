@@ -8,6 +8,25 @@ package com.github.fgowiki.spider.utils;
  **/
 public enum FgoClazz {
 
+    /*
+     1	盾	Shielder
+     2	剑	Saber
+     3	弓	Archer
+     4	枪	Lancer
+     5	骑	Rider
+     6	术	Caster
+     7	杀	Assassin
+     8	狂	Berserker
+     9	裁定	Ruler
+     10	复仇者	Avenger
+     11	冠位魔术师	Grand Caster
+     12	小丑	Alterego
+     13	月蚀	Moon Cancer
+     14	兽	Beast
+     15	异域者	Foreigner
+
+     */
+
     Shielder("盾", "Shielder", 1),
     Saber("剑", "Saber", 2),
     Archer("弓", "Archer", 3),
@@ -18,9 +37,11 @@ public enum FgoClazz {
     Berserker("狂", "Berserker", 8),
     Ruler("裁定", "Ruler", 9),
     Avenger("复仇者", "Avenger", 10),
-    AlterEgo("小丑", "Alterego", 11),
-    MoonCancer("月蚀", "Moon Cancer", 12),
-    Beast("兽", "Beast", 13);
+    GrandCaster("冠位魔术师", "Grand Caster", 11),
+    AlterEgo("小丑", "Alterego", 12),
+    MoonCancer("月蚀", "MoonCancer", 13),
+    Beast("兽", "Beast", 14),
+    Foreigner("异域者", "Foreigner", 15);
 
     private String name;
     private String nameEn;
@@ -61,6 +82,9 @@ public enum FgoClazz {
             if(fgoClazz.getNameEn().equals(clazz)){
                 return fgoClazz;
             }
+        }
+        if (clazz.contains("Beast")){
+            return Beast;
         }
         return null;
     }
