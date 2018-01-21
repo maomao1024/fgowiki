@@ -40,7 +40,7 @@ public class ControllerInterceptor {
      */
     @Around("controllerMethodPointcut()")
     public Object Interceptor(ProceedingJoinPoint pjp) {
-        long beginTime = System.currentTimeMillis();
+
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         String methodName = signature.getDeclaringTypeName() + "." + signature.getName();
         Object result = null;
@@ -53,7 +53,7 @@ public class ControllerInterceptor {
         logger.info("HTTP_ARGS : {}", getRequestParams(request));
         logger.info("METHOD : {}", methodName);
         logger.info("ARGS : {}", Arrays.toString(pjp.getArgs()));
-
+        long beginTime = System.currentTimeMillis();
         try {
             // 继续执行被拦截的方法
             result = pjp.proceed();

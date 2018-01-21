@@ -1,0 +1,22 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: 123
+        url: jdbc:mysql://192.168.0.121:3306/fgowiki
+        username: fgowiki
+    jpa:
+        hibernate:
+            naming:
+            ## jpa命名策略
+                strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    redis:
+        database: 0
+        host: 192.168.0.121
+        password: fgowiki
+        pool:
+            max-active: 8
+            max-idle: 8
+            max-wait: -1
+            min-idle: 0
+        port: 6379
+        timeout: 0

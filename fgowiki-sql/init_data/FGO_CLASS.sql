@@ -1,47 +1,47 @@
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (1, '盾', 'Shielder');
+insert into fgo_class (id, name, name_en)
+values (1, '盾', 'shielder');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (2, '剑', 'Saber');
+insert into fgo_class (id, name, name_en)
+values (2, '剑', 'saber');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (3, '弓', 'Archer');
+insert into fgo_class (id, name, name_en)
+values (3, '弓', 'archer');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (4, '枪', 'Lancer');
+insert into fgo_class (id, name, name_en)
+values (4, '枪', 'lancer');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (5, '骑', 'Rider');
+insert into fgo_class (id, name, name_en)
+values (5, '骑', 'rider');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (6, '术', 'Caster');
+insert into fgo_class (id, name, name_en)
+values (6, '术', 'caster');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (7, '杀', 'Assassin');
+insert into fgo_class (id, name, name_en)
+values (7, '杀', 'assassin');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (8, '狂', 'Berserker');
+insert into fgo_class (id, name, name_en)
+values (8, '狂', 'berserker');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (9, '裁定', 'Ruler');
+insert into fgo_class (id, name, name_en)
+values (9, '裁定', 'ruler');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (10, '复仇者', 'Avenger');
+insert into fgo_class (id, name, name_en)
+values (10, '复仇者', 'avenger');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (11, '冠位魔术师', 'Grand Caster');
+insert into fgo_class (id, name, name_en)
+values (11, '冠位魔术师', 'grand caster');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (12, '小丑', 'Alterego');
+insert into fgo_class (id, name, name_en)
+values (12, '小丑', 'alterego');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (13, '月蚀', 'Moon Cancer');
+insert into fgo_class (id, name, name_en)
+values (13, '月蚀', 'moon cancer');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (14, '兽', 'Beast');
+insert into fgo_class (id, name, name_en)
+values (14, '兽', 'beast');
 
-insert into FGO_CLASS (ID, NAME, NAME_EN)
-values (15, '异域者', 'Foreigner');
+insert into fgo_class (id, name, name_en)
+values (15, '异域者', 'foreigner');
 
 

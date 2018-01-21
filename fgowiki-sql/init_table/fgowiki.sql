@@ -1,591 +1,347 @@
 /*==============================================================*/
-/* DBMS name:      ORACLE Version 11g                           */
-/* Created on:     2017/12/18 20:49:01                          */
+/* dbms name:      mysql 5.0                                    */
+/* created on:     2018/1/14 16:00:14                           */
 /*==============================================================*/
 
 
+alter table fgo_attribute
+   drop primary key;
+
+drop table if exists fgo_attribute;
+
+alter table fgo_camp
+   drop primary key;
+
+drop table if exists fgo_camp;
+
+alter table fgo_class
+   drop primary key;
+
+drop table if exists fgo_class;
+
+alter table fgo_material
+   drop primary key;
+
+drop table if exists fgo_material;
+
+alter table fgo_noble_phantasm_info
+   drop primary key;
+
+drop table if exists fgo_noble_phantasm_info;
+
+alter table fgo_servant
+   drop primary key;
+
+drop table if exists fgo_servant;
+
+alter table fgo_servant_class_skill
+   drop primary key;
+
+drop table if exists fgo_servant_class_skill;
+
+alter table fgo_servant_material
+   drop primary key;
+
+drop table if exists fgo_servant_material;
+
+alter table fgo_servant_noble_phantasm
+   drop primary key;
+
+drop table if exists fgo_servant_noble_phantasm;
+
+alter table fgo_servant_skill
+   drop primary key;
+
+drop table if exists fgo_servant_skill;
+
+alter table fgo_servant_story
+   drop primary key;
+
+drop table if exists fgo_servant_story;
+
+alter table fgo_servant_voice
+   drop primary key;
+
+drop table if exists fgo_servant_voice;
+
+alter table fgo_skill_info
+   drop primary key;
+
+drop table if exists fgo_skill_info;
+
 /*==============================================================*/
-/* Table: FGO_ATTRIBUTE                                         */
+/* table: fgo_attribute                                         */
 /*==============================================================*/
-CREATE TABLE FGO_ATTRIBUTE
+create table fgo_attribute
 (
-  ID   VARCHAR2(2) NOT NULL,
-  NAME VARCHAR2(64)
+   id                   varchar(2) not null comment 'id',
+   name                 varchar(64) comment '名称'
 );
 
-COMMENT ON TABLE FGO_ATTRIBUTE IS
-'属性九宫格';
+alter table fgo_attribute comment '属性九宫格';
 
-COMMENT ON COLUMN FGO_ATTRIBUTE.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_ATTRIBUTE.NAME IS
-'名称';
-
-ALTER TABLE FGO_ATTRIBUTE
-  ADD CONSTRAINT PK_FGO_ATTRIBUTE PRIMARY KEY (ID);
+alter table fgo_attribute
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_CAMP                                              */
+/* table: fgo_camp                                              */
 /*==============================================================*/
-CREATE TABLE FGO_CAMP
+create table fgo_camp
 (
-  ID   INTEGER NOT NULL,
-  NAME VARCHAR2(32)
+   id                   int not null comment 'id',
+   name                 varchar(32) comment '名称'
 );
 
-COMMENT ON TABLE FGO_CAMP IS
-'阵营';
+alter table fgo_camp comment '阵营';
 
-COMMENT ON COLUMN FGO_CAMP.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_CAMP.NAME IS
-'名称';
-
-ALTER TABLE FGO_CAMP
-  ADD CONSTRAINT PK_FGO_CAMP PRIMARY KEY (ID);
+alter table fgo_camp
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_CLASS                                             */
+/* table: fgo_class                                             */
 /*==============================================================*/
-CREATE TABLE FGO_CLASS
+create table fgo_class
 (
-  ID      INTEGER NOT NULL,
-  NAME    VARCHAR2(32),
-  NAME_EN VARCHAR2(32)
+   id                   int not null comment 'id',
+   name                 varchar(32) comment '名称',
+   name_en              varchar(32) comment '英文名称'
 );
 
-COMMENT ON TABLE FGO_CLASS IS
-'阶职';
+alter table fgo_class comment '阶职';
 
-COMMENT ON COLUMN FGO_CLASS.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_CLASS.NAME IS
-'名称';
-
-COMMENT ON COLUMN FGO_CLASS.NAME_EN IS
-'英文名称';
-
-ALTER TABLE FGO_CLASS
-  ADD CONSTRAINT PK_FGO_CLASS PRIMARY KEY (ID);
+alter table fgo_class
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_MATERIAL                                          */
+/* table: fgo_material                                          */
 /*==============================================================*/
-CREATE TABLE FGO_MATERIAL
+create table fgo_material
 (
-  ID          INTEGER NOT NULL,
-  NAME        VARCHAR2(64),
-  TYPE        INTEGER,
-  BOX         INTEGER,
-  DESCRIPTION VARCHAR2(512),
-  LOCATION    VARCHAR2(512)
+   id                   int not null comment 'id',
+   name                 varchar(64) comment '名称',
+   type                 int comment '类型',
+   box                  int comment '箱子类型',
+   description          varchar(512) comment '描述',
+   location             varchar(512) comment '掉落地点'
 );
 
-COMMENT ON TABLE FGO_MATERIAL IS
-'材料表';
+alter table fgo_material comment '材料表';
 
-COMMENT ON COLUMN FGO_MATERIAL.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_MATERIAL.NAME IS
-'名称';
-
-COMMENT ON COLUMN FGO_MATERIAL.TYPE IS
-'类型';
-
-COMMENT ON COLUMN FGO_MATERIAL.BOX IS
-'箱子类型';
-
-COMMENT ON COLUMN FGO_MATERIAL.DESCRIPTION IS
-'描述';
-
-COMMENT ON COLUMN FGO_MATERIAL.LOCATION IS
-'掉落地点';
-
-ALTER TABLE FGO_MATERIAL
-  ADD CONSTRAINT PK_FGO_MATERIAL PRIMARY KEY (ID);
+alter table fgo_material
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_NOBLE_PHANTASM_INFO                               */
+/* table: fgo_noble_phantasm_info                               */
 /*==============================================================*/
-CREATE TABLE FGO_NOBLE_PHANTASM_INFO
+create table fgo_noble_phantasm_info
 (
-  ID          VARCHAR2(32) NOT NULL,
-  DESCRIPTION VARCHAR2(256),
-  STAGE1      NUMBER(6, 2),
-  STAGE2      NUMBER(6, 2),
-  STAGE3      NUMBER(6, 2),
-  STAGE4      NUMBER(6, 2),
-  STAGE5      NUMBER(6, 2),
-  TYPE        INTEGER
+   id                   varchar(32) not null comment 'id',
+   description          varchar(256) comment '描述',
+   stage1               numeric(6,2) comment 'stage1',
+   stage2               numeric(6,2) comment 'stage2',
+   stage3               numeric(6,2) comment 'stage3',
+   stage4               numeric(6,2) comment 'stage4',
+   stage5               numeric(6,2) comment 'stage5',
+   type                 int comment '类型'
 );
 
-COMMENT ON TABLE FGO_NOBLE_PHANTASM_INFO IS
-'宝具效果';
+alter table fgo_noble_phantasm_info comment '宝具效果';
 
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.DESCRIPTION IS
-'描述';
-
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.STAGE1 IS
-'STAGE1';
-
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.STAGE2 IS
-'STAGE2';
-
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.STAGE3 IS
-'STAGE3';
-
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.STAGE4 IS
-'STAGE4';
-
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.STAGE5 IS
-'STAGE5';
-
-COMMENT ON COLUMN FGO_NOBLE_PHANTASM_INFO.TYPE IS
-'类型';
-
-ALTER TABLE FGO_NOBLE_PHANTASM_INFO
-  ADD CONSTRAINT PK_FGO_NOBLE_PHANTASM_INFO PRIMARY KEY (ID);
+alter table fgo_noble_phantasm_info
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SERVANT                                           */
+/* table: fgo_servant                                           */
 /*==============================================================*/
-CREATE TABLE FGO_SERVANT
+create table fgo_servant
 (
-  ID               INTEGER NOT NULL,
-  NAME_ZH          VARCHAR2(64),
-  NAME_EN          VARCHAR2(64),
-  NAME_JP          VARCHAR2(64),
-  NICKNAME         VARCHAR2(256),
-  CLASS            INTEGER,
-  STAR             INTEGER,
-  CAMP             INTEGER,
-  ATK_STAGE0       INTEGER,
-  HP_STAGE0        INTEGER,
-  CARDS            VARCHAR2(5),
-  ATK_STAGE4       INTEGER,
-  HP_STAGE4        INTEGER,
-  ATK_LV90         INTEGER,
-  HP_LV90          INTEGER,
-  ATK_LV100        INTEGER,
-  HP_LV100         INTEGER,
-  ART_HIT          INTEGER,
-  BUSTER_HIT       INTEGER,
-  QUICK_HIT        INTEGER,
-  EXTRA_HIT        INTEGER,
-  CRIT             INTEGER,
-  CRIT_STAR        NUMBER(5, 4),
-  NP_RATE_ART      NUMBER(5, 4),
-  NP_RATE_BUSTER   NUMBER(5, 4),
-  NP_RATE_QUICK    NUMBER(5, 4),
-  NP_RATE_EXTRA    NUMBER(5, 4),
-  NP_RATE_ATTACKED NUMBER(5, 4),
-  GENDER           INTEGER,
-  REGION           VARCHAR2(64),
-  ATTRIBUTES       VARCHAR2(64),
-  PAINTER          VARCHAR2(64),
-  CV               VARCHAR2(64),
-  HEIGHT           INTEGER,
-  WEIGHT           INTEGER,
-  ORIGIN           VARCHAR2(128)
+   id                   int not null comment 'id',
+   name_zh              varchar(64) comment '中文名',
+   name_en              varchar(64) comment '英文名',
+   name_jp              varchar(64) comment '日文名',
+   nickname             varchar(256) comment '昵称',
+   class                int comment '阶职',
+   star                 int comment '星级',
+   camp                 int comment '阵营',
+   atk_stage0           int comment '基础atk',
+   hp_stage0            int comment '基础hp',
+   cards                varchar(5) comment '配卡',
+   atk_stage4           int comment '灵基4阶段atk',
+   hp_stage4            int comment '灵基4阶段hp',
+   atk_lv90             int comment '90级atk',
+   hp_lv90              int comment '90级hp',
+   atk_lv100            int comment '100级_atk',
+   hp_lv100             int comment '100级_hp',
+   art_hit              int comment 'art攻击次数',
+   buster_hit           int comment 'buster攻击次数',
+   quick_hit            int comment 'quick攻击次数',
+   extra_hit            int comment 'extra攻击次数',
+   crit                 int comment '暴击权重',
+   crit_star            decimal(5,4) comment '暴击星掉落',
+   np_rate_art          decimal(5,4) comment 'np率art',
+   np_rate_buster       decimal(5,4) comment 'np率buster',
+   np_rate_quick        decimal(5,4) comment 'np率quick',
+   np_rate_extra        decimal(5,4) comment 'np率ex',
+   np_rate_attacked     decimal(5,4) comment 'np率被攻击',
+   gender               int comment '性别',
+   region               varchar(64) comment '地域',
+   attributes           varchar(64) comment '属性',
+   painter              varchar(64) comment '画师',
+   cv                   varchar(64) comment 'cv',
+   height               varchar(32) comment '身高',
+   weight               varchar(32) comment '体重',
+   origin               varchar(128) comment '出处'
 );
 
-COMMENT ON TABLE FGO_SERVANT IS
-'英灵信息';
+alter table fgo_servant comment '英灵信息';
 
-COMMENT ON COLUMN FGO_SERVANT.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT.NAME_ZH IS
-'中文名';
-
-COMMENT ON COLUMN FGO_SERVANT.NAME_EN IS
-'英文名';
-
-COMMENT ON COLUMN FGO_SERVANT.NAME_JP IS
-'日文名';
-
-COMMENT ON COLUMN FGO_SERVANT.NICKNAME IS
-'昵称';
-
-COMMENT ON COLUMN FGO_SERVANT.CLASS IS
-'阶职';
-
-COMMENT ON COLUMN FGO_SERVANT.STAR IS
-'星级';
-
-COMMENT ON COLUMN FGO_SERVANT.CAMP IS
-'阵营';
-
-COMMENT ON COLUMN FGO_SERVANT.ATK_STAGE0 IS
-'基础ATK';
-
-COMMENT ON COLUMN FGO_SERVANT.HP_STAGE0 IS
-'基础HP';
-
-COMMENT ON COLUMN FGO_SERVANT.CARDS IS
-'配卡';
-
-COMMENT ON COLUMN FGO_SERVANT.ATK_STAGE4 IS
-'灵基4阶段ATK';
-
-COMMENT ON COLUMN FGO_SERVANT.HP_STAGE4 IS
-'灵基4阶段HP';
-
-COMMENT ON COLUMN FGO_SERVANT.ATK_LV90 IS
-'90级ATK';
-
-COMMENT ON COLUMN FGO_SERVANT.HP_LV90 IS
-'90级HP';
-
-COMMENT ON COLUMN FGO_SERVANT.ATK_LV100 IS
-'100级_ATK';
-
-COMMENT ON COLUMN FGO_SERVANT.HP_LV100 IS
-'100级_HP';
-
-COMMENT ON COLUMN FGO_SERVANT.ART_HIT IS
-'art攻击次数';
-
-COMMENT ON COLUMN FGO_SERVANT.BUSTER_HIT IS
-'buster攻击次数';
-
-COMMENT ON COLUMN FGO_SERVANT.QUICK_HIT IS
-'quick攻击次数';
-
-COMMENT ON COLUMN FGO_SERVANT.EXTRA_HIT IS
-'extra攻击次数';
-
-COMMENT ON COLUMN FGO_SERVANT.CRIT IS
-'暴击权重';
-
-COMMENT ON COLUMN FGO_SERVANT.CRIT_STAR IS
-'暴击星掉落';
-
-COMMENT ON COLUMN FGO_SERVANT.NP_RATE_ART IS
-'np率art';
-
-COMMENT ON COLUMN FGO_SERVANT.NP_RATE_BUSTER IS
-'np率buster';
-
-COMMENT ON COLUMN FGO_SERVANT.NP_RATE_QUICK IS
-'np率quick';
-
-COMMENT ON COLUMN FGO_SERVANT.NP_RATE_EXTRA IS
-'np率ex';
-
-COMMENT ON COLUMN FGO_SERVANT.NP_RATE_ATTACKED IS
-'np率被攻击';
-
-COMMENT ON COLUMN FGO_SERVANT.GENDER IS
-'性别';
-
-COMMENT ON COLUMN FGO_SERVANT.REGION IS
-'地域';
-
-COMMENT ON COLUMN FGO_SERVANT.ATTRIBUTES IS
-'属性';
-
-COMMENT ON COLUMN FGO_SERVANT.PAINTER IS
-'画师';
-
-COMMENT ON COLUMN FGO_SERVANT.CV IS
-'cv';
-
-COMMENT ON COLUMN FGO_SERVANT.HEIGHT IS
-'身高';
-
-COMMENT ON COLUMN FGO_SERVANT.WEIGHT IS
-'体重';
-
-COMMENT ON COLUMN FGO_SERVANT.ORIGIN IS
-'出处';
-
-ALTER TABLE FGO_SERVANT
-  ADD CONSTRAINT PK_FGO_SERVANT PRIMARY KEY (ID);
+alter table fgo_servant
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SERVANT_CLASS_SKILL                               */
+/* table: fgo_servant_class_skill                               */
 /*==============================================================*/
-CREATE TABLE FGO_SERVANT_CLASS_SKILL
+create table fgo_servant_class_skill
 (
-  ID         VARCHAR2(32) NOT NULL,
-  SERVANT_ID INTEGER,
-  NAME       VARCHAR2(32),
-  "LEVEL"    VARCHAR2(8),
-  INFO_ID    VARCHAR2(32),
-  SID        INTEGER
+   id                   varchar(32) not null comment 'id',
+   servant_id           int comment 'id',
+   name                 varchar(32) comment '名称',
+   level                varchar(8) comment '固有等级',
+   info_id              varchar(32) comment '技能描述',
+   sid                  int comment '序号'
 );
 
-COMMENT ON TABLE FGO_SERVANT_CLASS_SKILL IS
-'阶职技能';
+alter table fgo_servant_class_skill comment '阶职技能';
 
-COMMENT ON COLUMN FGO_SERVANT_CLASS_SKILL.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_CLASS_SKILL.SERVANT_ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_CLASS_SKILL.NAME IS
-'名称';
-
-COMMENT ON COLUMN FGO_SERVANT_CLASS_SKILL."LEVEL" IS
-'固有等级';
-
-COMMENT ON COLUMN FGO_SERVANT_CLASS_SKILL.INFO_ID IS
-'技能描述';
-
-COMMENT ON COLUMN FGO_SERVANT_CLASS_SKILL.SID IS
-'序号';
-
-ALTER TABLE FGO_SERVANT_CLASS_SKILL
-  ADD CONSTRAINT PK_FGO_SERVANT_CLASS_SKILL PRIMARY KEY (ID);
+alter table fgo_servant_class_skill
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SERVANT_MATERIAL                                  */
+/* table: fgo_servant_material                                  */
 /*==============================================================*/
-CREATE TABLE FGO_SERVANT_MATERIAL
+create table fgo_servant_material
 (
-  ID         VARCHAR2(32) NOT NULL,
-  SERVANT_ID INTEGER,
-  SID        INTEGER,
-  "LEVEL"    INTEGER,
-  COUNT      INTEGER,
-  QP         INTEGER,
-  TYPE       INTEGER
+   id                   varchar(32) not null comment 'id',
+   servant_id           int comment 'id',
+   sid                  int comment '序号',
+   level                int comment '等级',
+   count                int comment '数量',
+   qp                   int comment '量子',
+   type                 int comment '类型'
 );
 
-COMMENT ON TABLE FGO_SERVANT_MATERIAL IS
-'从者素材';
+alter table fgo_servant_material comment '从者素材';
 
-COMMENT ON COLUMN FGO_SERVANT_MATERIAL.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_MATERIAL.SERVANT_ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_MATERIAL.SID IS
-'序号';
-
-COMMENT ON COLUMN FGO_SERVANT_MATERIAL."LEVEL" IS
-'等级';
-
-COMMENT ON COLUMN FGO_SERVANT_MATERIAL.COUNT IS
-'数量';
-
-COMMENT ON COLUMN FGO_SERVANT_MATERIAL.QP IS
-'量子';
-
-COMMENT ON COLUMN FGO_SERVANT_MATERIAL.TYPE IS
-'类型';
-
-ALTER TABLE FGO_SERVANT_MATERIAL
-  ADD CONSTRAINT PK_FGO_SERVANT_MATERIAL PRIMARY KEY (ID);
+alter table fgo_servant_material
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SERVANT_NOBLE_PHANTASM                            */
+/* table: fgo_servant_noble_phantasm                            */
 /*==============================================================*/
-CREATE TABLE FGO_SERVANT_NOBLE_PHANTASM
+create table fgo_servant_noble_phantasm
 (
-  ID         VARCHAR2(32) NOT NULL,
-  SERVANT_ID INTEGER,
-  NAME       VARCHAR2(32),
-  NAME_EN    VARCHAR2(32),
-  "LEVEL"    VARCHAR2(8),
-  INFO_ID    VARCHAR2(32)
+   id                   varchar(32) not null comment 'id',
+   servant_id           int comment 'id',
+   name                 varchar(32) comment '名称',
+   name_en              varchar(32) comment '英文名',
+   level                varchar(8) comment '固有等级',
+   info_id              varchar(32) comment '技能效果'
 );
 
-COMMENT ON TABLE FGO_SERVANT_NOBLE_PHANTASM IS
-'从者宝具';
+alter table fgo_servant_noble_phantasm comment '从者宝具';
 
-COMMENT ON COLUMN FGO_SERVANT_NOBLE_PHANTASM.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_NOBLE_PHANTASM.SERVANT_ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_NOBLE_PHANTASM.NAME IS
-'名称';
-
-COMMENT ON COLUMN FGO_SERVANT_NOBLE_PHANTASM.NAME_EN IS
-'英文名';
-
-COMMENT ON COLUMN FGO_SERVANT_NOBLE_PHANTASM."LEVEL" IS
-'固有等级';
-
-COMMENT ON COLUMN FGO_SERVANT_NOBLE_PHANTASM.INFO_ID IS
-'技能效果';
-
-ALTER TABLE FGO_SERVANT_NOBLE_PHANTASM
-  ADD CONSTRAINT PK_FGO_SERVANT_NOBLE_PHANTASM PRIMARY KEY (ID);
+alter table fgo_servant_noble_phantasm
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SERVANT_SKILL                                     */
+/* table: fgo_servant_skill                                     */
 /*==============================================================*/
-CREATE TABLE FGO_SERVANT_SKILL
+create table fgo_servant_skill
 (
-  ID         VARCHAR2(32) NOT NULL,
-  SERVANT_ID INTEGER,
-  NAME       VARCHAR2(32),
-  "LEVEL"    VARCHAR2(8),
-  INFO_ID    VARCHAR2(32)
+   id                   varchar(32) not null comment 'id',
+   servant_id           int comment 'id',
+   name                 varchar(32) comment '名称',
+   level                varchar(8) comment '固有等级',
+   info_id              varchar(32) comment '技能效果'
 );
 
-COMMENT ON TABLE FGO_SERVANT_SKILL IS
-'从者技能';
+alter table fgo_servant_skill comment '从者技能';
 
-COMMENT ON COLUMN FGO_SERVANT_SKILL.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_SKILL.SERVANT_ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_SKILL.NAME IS
-'名称';
-
-COMMENT ON COLUMN FGO_SERVANT_SKILL."LEVEL" IS
-'固有等级';
-
-COMMENT ON COLUMN FGO_SERVANT_SKILL.INFO_ID IS
-'技能效果';
-
-ALTER TABLE FGO_SERVANT_SKILL
-  ADD CONSTRAINT PK_FGO_SERVANT_SKILL PRIMARY KEY (ID);
+alter table fgo_servant_skill
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SERVANT_STORY                                     */
+/* table: fgo_servant_story                                     */
 /*==============================================================*/
-CREATE TABLE FGO_SERVANT_STORY
+create table fgo_servant_story
 (
-  ID          VARCHAR2(32) NOT NULL,
-  SERVANT_ID  INTEGER,
-  SID         INTEGER,
-  NAME        VARCHAR2(32),
-  DESCRIPTION VARCHAR2(8)
+   id                   varchar(32) not null comment 'id',
+   servant_id           int comment 'id',
+   sid                  int comment '序号',
+   name                 varchar(32) comment '名称',
+   description          varchar(8) comment '描述'
 );
 
-COMMENT ON TABLE FGO_SERVANT_STORY IS
-'从者故事';
+alter table fgo_servant_story comment '从者故事';
 
-COMMENT ON COLUMN FGO_SERVANT_STORY.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_STORY.SERVANT_ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_STORY.SID IS
-'序号';
-
-COMMENT ON COLUMN FGO_SERVANT_STORY.NAME IS
-'名称';
-
-COMMENT ON COLUMN FGO_SERVANT_STORY.DESCRIPTION IS
-'描述';
-
-ALTER TABLE FGO_SERVANT_STORY
-  ADD CONSTRAINT PK_FGO_SERVANT_STORY PRIMARY KEY (ID);
+alter table fgo_servant_story
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SERVANT_VOICE                                     */
+/* table: fgo_servant_voice                                     */
 /*==============================================================*/
-CREATE TABLE FGO_SERVANT_VOICE
+create table fgo_servant_voice
 (
-  ID          VARCHAR2(32) NOT NULL,
-  SERVANT_ID  INTEGER,
-  SID         INTEGER,
-  NAME        VARCHAR2(32),
-  DESCRIPTION VARCHAR2(8),
-  TYPE        INTEGER
+   id                   varchar(32) not null comment 'id',
+   servant_id           int comment 'id',
+   sid                  int comment '序号',
+   name                 varchar(32) comment '名称',
+   description          varchar(8) comment '描述',
+   type                 int comment 'type'
 );
 
-COMMENT ON TABLE FGO_SERVANT_VOICE IS
-'从者语音';
+alter table fgo_servant_voice comment '从者语音';
 
-COMMENT ON COLUMN FGO_SERVANT_VOICE.ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_VOICE.SERVANT_ID IS
-'id';
-
-COMMENT ON COLUMN FGO_SERVANT_VOICE.SID IS
-'序号';
-
-COMMENT ON COLUMN FGO_SERVANT_VOICE.NAME IS
-'名称';
-
-COMMENT ON COLUMN FGO_SERVANT_VOICE.DESCRIPTION IS
-'描述';
-
-COMMENT ON COLUMN FGO_SERVANT_VOICE.TYPE IS
-'type';
-
-ALTER TABLE FGO_SERVANT_VOICE
-  ADD CONSTRAINT PK_FGO_SERVANT_VOICE PRIMARY KEY (ID);
+alter table fgo_servant_voice
+   add primary key (id);
 
 /*==============================================================*/
-/* Table: FGO_SKILL_INFO                                        */
+/* table: fgo_skill_info                                        */
 /*==============================================================*/
-CREATE TABLE FGO_SKILL_INFO
+create table fgo_skill_info
 (
-  ID          VARCHAR2(32) NOT NULL,
-  DESCRIPTION VARCHAR2(256),
-  VALUE       NUMBER(6, 2),
-  GROWTH      NUMBER(6, 2)
+   id                   varchar(32) not null comment 'id',
+   description          varchar(256) comment '描述',
+   value                numeric(6,2) comment '初始数值',
+   growth               numeric(6,2) comment '成长'
 );
 
-COMMENT ON TABLE FGO_SKILL_INFO IS
-'技能效果';
+alter table fgo_skill_info comment '技能效果';
 
-COMMENT ON COLUMN FGO_SKILL_INFO.ID IS
-'id';
+alter table fgo_skill_info
+   add primary key (id);
 
-COMMENT ON COLUMN FGO_SKILL_INFO.DESCRIPTION IS
-'描述';
+alter table fgo_noble_phantasm_info add constraint fk_reference_5 foreign key (id)
+      references fgo_servant_noble_phantasm (id) on delete restrict on update restrict;
 
-COMMENT ON COLUMN FGO_SKILL_INFO.VALUE IS
-'初始数值';
+alter table fgo_servant_class_skill add constraint fk_servant_class foreign key (servant_id)
+      references fgo_servant (id) on delete restrict on update restrict;
 
-COMMENT ON COLUMN FGO_SKILL_INFO.GROWTH IS
-'成长';
+alter table fgo_servant_material add constraint fk_servant_material foreign key (servant_id)
+      references fgo_servant (id) on delete restrict on update restrict;
 
-ALTER TABLE FGO_SKILL_INFO
-  ADD CONSTRAINT PK_FGO_SKILL_INFO PRIMARY KEY (ID);
+alter table fgo_servant_noble_phantasm add constraint fk_servant_noble_phantasm foreign key (servant_id)
+      references fgo_servant (id) on delete restrict on update restrict;
 
-ALTER TABLE FGO_NOBLE_PHANTASM_INFO
-  ADD CONSTRAINT FK_FGO_NOBL_REFERENCE_FGO_SERV FOREIGN KEY (ID)
-REFERENCES FGO_SERVANT_NOBLE_PHANTASM (ID);
+alter table fgo_servant_skill add constraint fk_servant_skill foreign key (servant_id)
+      references fgo_servant (id) on delete restrict on update restrict;
 
-ALTER TABLE FGO_SERVANT_CLASS_SKILL
-  ADD CONSTRAINT FK_SERVANT_CLASS FOREIGN KEY (SERVANT_ID)
-REFERENCES FGO_SERVANT (ID);
+alter table fgo_servant_story add constraint fk_servant_story foreign key (servant_id)
+      references fgo_servant (id) on delete restrict on update restrict;
 
-ALTER TABLE FGO_SERVANT_MATERIAL
-  ADD CONSTRAINT FK_SERVANT_MATERIAL FOREIGN KEY (SERVANT_ID)
-REFERENCES FGO_SERVANT (ID);
+alter table fgo_servant_voice add constraint fk_servant_voice foreign key (servant_id)
+      references fgo_servant (id) on delete restrict on update restrict;
 
-ALTER TABLE FGO_SERVANT_NOBLE_PHANTASM
-  ADD CONSTRAINT FK_SERVANT_NOBLE_PHANTASM FOREIGN KEY (SERVANT_ID)
-REFERENCES FGO_SERVANT (ID);
-
-ALTER TABLE FGO_SERVANT_SKILL
-  ADD CONSTRAINT FK_SERVANT_SKILL FOREIGN KEY (SERVANT_ID)
-REFERENCES FGO_SERVANT (ID);
-
-ALTER TABLE FGO_SERVANT_STORY
-  ADD CONSTRAINT FK_SERVANT_STORY FOREIGN KEY (SERVANT_ID)
-REFERENCES FGO_SERVANT (ID);
-
-ALTER TABLE FGO_SERVANT_VOICE
-  ADD CONSTRAINT FK_SERVANT_VOICE FOREIGN KEY (SERVANT_ID)
-REFERENCES FGO_SERVANT (ID);
-
-ALTER TABLE FGO_SKILL_INFO
-  ADD CONSTRAINT FK_FGO_SKIL_REFERENCE_FGO_SERV FOREIGN KEY (ID)
-REFERENCES FGO_SERVANT_SKILL (ID);
+alter table fgo_skill_info add constraint fk_reference_6 foreign key (id)
+      references fgo_servant_skill (id) on delete restrict on update restrict;
 
