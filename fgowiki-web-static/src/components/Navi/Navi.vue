@@ -30,7 +30,7 @@
                 <el-col :xs="4" :sm="4" :md="4" :lg="4">
                     <div>
                         <el-menu default-active="1" class="el-menu-vertical-demo" style="min-height:800px" @select="handleSelect">
-                            <el-menu-item index="1"><i class="el-icon-message"></i>导航一</el-menu-item>
+                            <el-menu-item index="1"><i class="el-icon-message"></i>英灵信息</el-menu-item>
                             <el-menu-item index="2"><i class="el-icon-menu"></i>导航二</el-menu-item>
                             <el-menu-item index="3"><i class="el-icon-setting"></i>导航三</el-menu-item>
                         </el-menu>
@@ -70,7 +70,7 @@
             handleSelect(key, keyPath){
                 switch(key){
                     case '1':
-                        this.$router.push('/Servant');
+                        this.$router.push('/ServantList');
                         this.breadcrumbItems  = ['英灵信息'];
                         break;
                     case '2':

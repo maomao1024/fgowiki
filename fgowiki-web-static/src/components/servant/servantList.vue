@@ -1,19 +1,20 @@
 <template>
     <div>
         <el-table :data="servantInfo" height="800" border style="width: 100%">
-            <el-table-column  label="头像">
+            <el-table-column label="头像">
                 <template scope="scope">
                     <img :src="scope.row.image" width="100" height="100"/>
                 </template>
             </el-table-column>
-            <el-table-column  label="姓名">
+            <!--<router-link :to="{path:'/hotel',params:{id:scope.row.id}}"/>-->
+            <el-table-column label="姓名" onclick="loadDetial(scope.row.id)">
                 <template scope="scope">
-                  {{ scope.row.nameZh }}
+                    {{ scope.row.nameZh }}
                 </template>
             </el-table-column>
             <el-table-column label="阶职">
                 <template scope="scope">
-                  {{ scope.row.clazz.nameEn }}
+                    {{ scope.row.clazz.nameEn }}
                 </template>
             </el-table-column>
             <el-table-column label="星级">
@@ -54,12 +55,15 @@
                 ).then(function (res) {
                     let data = res.data;
                     obj.servantInfo = data.content;
-                    obj.servantInfo.forEach(o => o.image = '/static/img/servant/head/'+('000'+o.id).substr(-3)+'.jpg');
+                    obj.servantInfo.forEach(o => o.image = '/static/img/servant/head/' + ('000' + o.id).substr(-3) + '.jpg');
                     obj.pageNum = data.number + 1;
                     obj.toatlSize = data.totalElements;
                 }).catch(function (err) {
                     console.log(err)
                 });
+            },
+            loadDetial: function (id) {
+                this.$parent.$router.push('/ServantInfo?id=' + id);
             },
             handleSizeChange(val) {
                 this.pageSize = val;

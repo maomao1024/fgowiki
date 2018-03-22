@@ -1,5 +1,6 @@
-package com.github.fgowiki.api.interceptor;
+package com.github.fgowiki.interceptor;
 
+import com.github.fgowiki.utils.RequestUtils;
 import com.google.common.base.Joiner;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -44,10 +45,9 @@ public class ControllerInterceptor {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         String methodName = signature.getDeclaringTypeName() + "." + signature.getName();
         Object result = null;
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
+        HttpServletRequest request = RequestUtils.getRequest();
 
-        logger.info("请求开始，URL：{}，IP：{}", request.getRequestURL(), request.getRemoteAddr());
+        logger.info("请求开始，URL：{}，IP：{}", request.getRequestURL(), RequestUtils.getIpAddr());
 
         logger.info("HTTP_METHOD : {} ", request.getMethod());
         logger.info("HTTP_ARGS : {}", getRequestParams(request));

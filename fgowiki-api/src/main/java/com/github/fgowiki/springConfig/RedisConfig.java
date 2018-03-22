@@ -1,4 +1,4 @@
-package com.github.fgowiki.api.springConfig;
+package com.github.fgowiki.springConfig;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
@@ -33,7 +33,6 @@ public class RedisConfig extends CachingConfigurerSupport {
         };
     }
 
-    @SuppressWarnings("rawtypes")
     @Bean
     public CacheManager cacheManager(RedisTemplate redisTemplate) {
         RedisCacheManager cacheManager = new RedisCacheManager(redisTemplate);
