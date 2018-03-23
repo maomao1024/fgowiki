@@ -1,13 +1,17 @@
 package com.github.fgowiki.api.controller;
 
 import com.github.fgowiki.api.entity.FgoServant;
-import com.github.fgowiki.api.service.FgoServantService;
+import com.github.fgowiki.api.service.ServantService;
+import com.github.fgowiki.core.bean.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @author jiang
@@ -15,18 +19,18 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 @RequestMapping("/servant")
-public class FgoServantController {
+public class ServantController {
 
     @Autowired
-    private FgoServantService service;
+    private ServantService service;
 
-    @RequestMapping(value = "/{servantId}", method = RequestMethod.GET)
-    public FgoServant getServant(@PathVariable("servantId") Integer servantId) {
+    @GetMapping(value = "/{servantId}")
+    public ResultBean<FgoServant> getServant(@PathVariable("servantId") Integer servantId) {
         return service.get(servantId);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public Page<FgoServant> getServantList(Integer pageNum, Integer pageSize) {
+    @GetMapping(value = "/")
+    public ResultBean<List<FgoServant>> getServantList(Integer pageNum, Integer pageSize) {
         return service.getList(pageNum, pageSize);
     }
 }

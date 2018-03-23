@@ -53,11 +53,11 @@
                         },
                     },
                 ).then(function (res) {
-                    let data = res.data;
-                    obj.servantInfo = data.content;
+                    let result = res.data;
+                    obj.servantInfo = result.data;
                     obj.servantInfo.forEach(o => o.image = '/static/img/servant/head/' + ('000' + o.id).substr(-3) + '.jpg');
-                    obj.pageNum = data.number + 1;
-                    obj.toatlSize = data.totalElements;
+	                obj.pageNum = result.pageNum + 1;
+                    obj.toatlSize = result.toatlSize;
                 }).catch(function (err) {
                     console.log(err)
                 });

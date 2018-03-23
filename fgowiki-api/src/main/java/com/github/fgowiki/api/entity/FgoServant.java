@@ -3,6 +3,7 @@ package com.github.fgowiki.api.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * 功能描述：
@@ -13,7 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-public class FgoServant {
+public class FgoServant implements Serializable {
     @Id
     private Integer id;
     private String nameZh;

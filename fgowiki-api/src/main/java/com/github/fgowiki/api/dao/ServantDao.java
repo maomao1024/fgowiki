@@ -10,6 +10,6 @@ import com.github.fgowiki.core.dao.BaseDao;
  * @version 1.0
  * @since 2017/12/22
  */
-public interface FgoServantDao extends BaseDao<FgoServant,Integer> {
+public interface ServantDao extends BaseDao<FgoServant,Integer> {
 
 }
