@@ -2,6 +2,7 @@ package com.github.fgowiki.api.dao;
 
 import com.github.fgowiki.api.entity.FgoServant;
 import com.github.fgowiki.core.dao.BaseDao;
+import org.springframework.cache.annotation.Cacheable;
 
 /**
  * 功能描述：
@@ -12,4 +13,7 @@ import com.github.fgowiki.core.dao.BaseDao;
  */
 public interface ServantDao extends BaseDao<FgoServant,Integer> {
 
+    @Override
+    @Cacheable(value = "servant")
+    FgoServant getOne(Integer integer);
 }

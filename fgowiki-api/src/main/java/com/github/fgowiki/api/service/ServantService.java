@@ -25,10 +25,4 @@ public class ServantService extends BaseService<FgoServant,Integer> {
         return dao;
     }
 
-
-	@Override
-	@Cacheable(value = "servant")
-	public ResultBean<FgoServant> get(Integer id) {
-		return super.get(id);
-	}
 }

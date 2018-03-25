@@ -32,11 +32,6 @@ public class FgoMaterialPageProcesser extends FgoJsonPage {
 
 
     @Override
-    Map<String, String> getFeilds() {
-        return feilds;
-    }
-
-    @Override
     String getUrl() {
         return "http://api.umowang.com/guides/data/fgo?jsoncallback=getmaterialdata&command=material_list_all&page={0}";
     }

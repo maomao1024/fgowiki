@@ -5,7 +5,14 @@ import com.github.fgowiki.spider.model.FgoServant;
 import com.github.fgowiki.spider.utils.FgoCamp;
 import com.github.fgowiki.spider.utils.ObjectUtil;
 import com.github.fgowiki.spider.utils.HibernateUtil;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
@@ -13,7 +20,12 @@ import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Html;
 import us.codecraft.webmagic.selector.Selectable;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -25,10 +37,41 @@ import java.util.*;
 public class FgoServantPageProcesser implements PageProcessor {
 
 	private Site site = Site.me().setRetryTimes(0).setSleepTime(1000);
-	private static List<FgoServant> servantList;
-	Map<String, String> map = new HashMap<>();
+    private static Map<String, Integer> feilds = new HashMap<>();
 	private static int index = 114;
 	private static final String url = "http://fgowiki.com/guide/petdetail/{0}";
+
+    private static Sheet sheet;
+    private static Workbook workbook;
+    private static int lastRowIndex = 0;
+    private static File file;
+
+    static {
+        FileInputStream fos = null;
+        try {
+            System.out.println("文件路径：" + System.getProperty("user.home"));
+            file = new File(System.getProperty("user.home") + "\\Documents\\fgo_servant.xls");
+            fos = new FileInputStream(file);
+            workbook = new HSSFWorkbook(new POIFSFileSystem(fos));
+            sheet = workbook.getSheetAt(0);
+            int cellIndex = 0;
+            int rowIndex = 0;
+            Row row = sheet.getRow(rowIndex);
+            Cell cell = row.getCell(cellIndex);
+            while (cell != null && StringUtils.isNotBlank(cell.getStringCellValue())) {
+                feilds.put(cell.getStringCellValue().toLowerCase(), cellIndex - 1);
+                cell = row.getCell(cellIndex++);
+            }
+            while (row != null && row.getCell(feilds.get("id")) != null && StringUtils.isNotBlank(row.getCell(feilds.get("id")).getStringCellValue())) {
+                row = sheet.getRow(rowIndex++);
+            }
+            lastRowIndex = rowIndex - 1;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(fos);
+        }
+    }
 
 	@Override
 	public void process(Page page) {
@@ -43,67 +86,18 @@ public class FgoServantPageProcesser implements PageProcessor {
 			index++;
 			page.addTargetRequest(getNextRequest());
 		} else {
-			map.forEach((key, value) -> System.out.println(key));
+            this.callback();
 		}
 
 		System.out.println("=====================================================");
 	}
 
 	public void saveData(JSONObject data) {
-		FgoServant servant = (FgoServant) HibernateUtil.get(FgoServant.class, data.getInteger("ID"));
-		if (servant != null) {
-			try {
-				String campStr = data.getString("Camp");
-				Integer camp = FgoCamp.getCamp(campStr);
-				Integer star = data.getInteger("STAR");
-				Integer card_quick = data.getInteger("CARD_QUICK");
-				Integer card_arts = data.getInteger("CARD_ARTS");
-				Integer card_buster = data.getInteger("CARD_BUSTER");
-				String cards = ObjectUtil.getStringBylength("A", card_arts) + ObjectUtil.getStringBylength("B", card_buster) + ObjectUtil.getStringBylength("Q", card_quick);
-				Integer lv90_atk = data.getInteger("LV90_ATK");
-				Integer lv90_hp = data.getInteger("LV90_HP");
-				Integer lv100_atk = data.getInteger("LV100_ATK");
-				Integer lv100_hp = data.getInteger("LV100_HP");
-				Integer exHit = data.getInteger("EXHit");
-				Integer artHit = data.getInteger("ArtHit");
-				Integer busHit = data.getInteger("BusHit");
-				Integer quiHit = data.getInteger("QuiHit");
-				String painter = data.getString("ILLUST");
-				String cv = data.getString("CV");
-				String orgin = data.getString("Origin");
-				String region = data.getString("Region");
-				Integer Height = null;
-				Integer Weight = null;
-				try {
-					Height = Integer.parseInt(removeString(data.getString("Height")));
-				} catch (NumberFormatException e) {
-					System.out.println(servant.getNameZh() + "-Weight:" + data.getString("Height").toLowerCase());
-				}
-				try {
-					Weight = Integer.parseInt(removeString(data.getString("Weight")));
-				} catch (NumberFormatException e) {
-					System.out.println(servant.getNameZh() + "-Weight:" + data.getString("Weight").toLowerCase());
-				}
-				String gender = data.getString("Gender");
-
-				servant.setCamp(camp);
-				servant.setCards(cards);
-				servant.setAtkLv90(lv90_atk);
-				servant.setHpLv90(lv90_hp);
-				servant.setAtkLv100(lv100_atk);
-				servant.setHpLv100(lv100_hp);
-				servant.setPainter(painter);
-				servant.setCv(cv);
-				servant.setOrigin(orgin);
-				servant.setGender(gender == null ? 0 : (gender.contains("女") ? 0 : 1));
-				servant.setRegion(region);
-				servant.setHeight(Height);
-				servant.setWeight(Weight);
-				HibernateUtil.saveOrUpdate(servant);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
+        Row row = sheet.createRow(lastRowIndex++);
+        System.out.println("保存id为" + data.getString("ID") + "的数据");
+        data.forEach((key, value) -> {
+            row.createCell(feilds.get(key.toLowerCase())).setCellValue(Objects.toString(value, ""));
+        });
 	}
 
 	@Override
@@ -122,6 +116,19 @@ public class FgoServantPageProcesser implements PageProcessor {
 	private static String getNextRequest() {
 		return MessageFormat.format(url, index);
 	}
+
+    private void callback() {
+        FileOutputStream fos = null;
+        try {
+            String name = "\\Documents\\fgo_servant_" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".xls";
+            fos = new FileOutputStream(new File(System.getProperty("user.home") + name));
+            workbook.write(fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(fos);
+        }
+    }
 
 
 	private String removeString(String str) {

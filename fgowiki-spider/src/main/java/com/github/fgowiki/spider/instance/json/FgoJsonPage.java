@@ -18,7 +18,7 @@ import java.util.Map;
  **/
 public abstract class FgoJsonPage implements PageProcessor {
 
-    private int pageNumber = 1;
+    protected static int pageNumber = 1;
 
     @Override
     public void process(Page page) {
@@ -37,12 +37,6 @@ public abstract class FgoJsonPage implements PageProcessor {
         System.out.println("=====================================================");
     }
 
-    /**
-     * 设置将josn转为field的映射关系
-     *
-     * @return
-     */
-    abstract Map<String, String> getFeilds();
 
     /**
      * 设置url 须包含分页信息

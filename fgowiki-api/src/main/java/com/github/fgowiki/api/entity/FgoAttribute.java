@@ -1,5 +1,6 @@
 package com.github.fgowiki.api.entity;
 
+import com.github.fgowiki.core.bean.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -14,7 +15,7 @@ import javax.persistence.Id;
  */
 @Data
 @Entity
-public class FgoAttribute {
+public class FgoAttribute extends BaseEntity{
     @Id
     private String id;
     private String name;

@@ -4,11 +4,23 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.fgowiki.spider.model.FgoServant;
 import com.github.fgowiki.spider.utils.FgoClazz;
 import com.github.fgowiki.spider.utils.HibernateUtil;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import us.codecraft.webmagic.Site;
 
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 英灵信息
@@ -20,74 +32,68 @@ public class FgoServantPageProcesser extends FgoJsonPage {
 
     private Site site = Site.me().setRetryTimes(0).setSleepTime(1000);
 
-    private static Map<String, String> feilds = new HashMap<>();
+    private static Map<String, Integer> feilds = new HashMap<>();
     private static Map<Integer, JSONObject> unresolved = new HashMap<>();
+    private static Sheet sheet;
+    private static Workbook workbook;
+    private static int lastRowIndex = 0;
+    private static File file;
 
 
     static {
-        feilds.put("id", "id");
-        feilds.put("name", "name");
-        feilds.put("name_jp", "name_jp");
-        feilds.put("name_en", "name_en");
-        feilds.put("image", "image");
-        feilds.put("class", "class");
-        feilds.put("lv1_hp", "lv1_hp");
-        feilds.put("lv1_atk", "lv1_atk");
-        feilds.put("lvmax4_hp", "lvmax4_hp");
-        feilds.put("lvmax4_atk", "lvmax4_atk");
+        FileInputStream fos = null;
+        try {
+            System.out.println("文件路径：" + System.getProperty("user.home"));
+            file = new File(System.getProperty("user.home") + "\\Documents\\fgo_servant.xls");
+            fos = new FileInputStream(file);
+            workbook = new HSSFWorkbook(new POIFSFileSystem(fos));
+            sheet = workbook.getSheetAt(1);
+            int cellIndex = 0;
+            int rowIndex = 0;
+            Row row = sheet.getRow(rowIndex);
+            Cell cell = row.getCell(cellIndex);
+            while (cell != null && StringUtils.isNotBlank(cell.getStringCellValue())) {
+                feilds.put(cell.getStringCellValue().toLowerCase(), cellIndex - 1);
+                cell = row.getCell(cellIndex++);
+            }
+            while (row != null && row.getCell(feilds.get("id")) != null && StringUtils.isNotBlank(row.getCell(feilds.get("id")).getStringCellValue())) {
+                row = sheet.getRow(rowIndex++);
+            }
+            lastRowIndex = rowIndex - 1;
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(fos);
+        }
     }
 
-
-    @Override
-    Map<String, String> getFeilds() {
-        return feilds;
-    }
 
     @Override
     String getUrl() {
-        return "http://api.umowang.com/guides/data/fgo?jsoncallback=getguidedata&command=pets_list_all&page={0}";
+        return "https://api.umowang.com/guides/data/fgo?jsoncallback=getguidedata&command=pets_list_all&page={0}&params=";
     }
 
     @Override
     void saveData(JSONObject data) {
-        /*
-         image	http://file.fgowiki.com/fgo/head/191.png
-         lv1_hp	1744
-         lvmax4_atk	9997
-         lvmax4_hp	10901
-         name	机械伊丽酱Ⅱ号机
-         name_jp	メカエリチャンⅡ号機
-         id	191
-         lv1_atk	1666
-         class	Alterego
-         name_en	mekaerichan Ⅱ
-         */
-        FgoServant servant = new FgoServant();
-        servant.setAtkStage0(data.getInteger("lv1_atk"));
-        servant.setHpStage0(data.getInteger("lv1_hp"));
-        servant.setAtkStage4(data.getInteger("lvmax4_atk"));
-        servant.setHpStage4(data.getInteger("lvmax4_hp"));
-        servant.setNameZh(data.getString("name"));
-        servant.setNameJp(data.getString("name_jp"));
-        servant.setId(data.getInteger("id"));
-        servant.setAtkStage0(data.getInteger("lv1_atk"));
-        String s = data.getString("class");
-        if (StringUtils.isNotBlank(s)) {
-            // FIXME 仍然有问题
-            s = s.trim().replaceAll("Ⅰ", "").replaceAll("Ⅱ ", "").replaceAll("Ⅲ", "");
-            FgoClazz fgoClazz = FgoClazz.getClazz(s);
-            servant.setClazz(fgoClazz == null ? 0 : fgoClazz.getId());
-            if (fgoClazz == null) {
-                unresolved.put(servant.getId(), data);
-            }
-        }
-        servant.setNameEn(data.getString("name_en"));
-        HibernateUtil.add(servant);
+        Row row = sheet.createRow(lastRowIndex++);
+        System.out.println("保存id为" + data.getString("id") + "的数据");
+        data.forEach((key, value) -> {
+            row.createCell(feilds.get(key.toLowerCase())).setCellValue(Objects.toString(value, ""));
+        });
     }
 
     @Override
     protected void callback() {
-        unresolved.forEach((key,value)-> System.out.println(key+":"+value.toJSONString()));
+        FileOutputStream fos = null;
+        try {
+            String name = "\\Documents\\fgo_servant_" + new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".xls";
+            fos = new FileOutputStream(new File(System.getProperty("user.home") + name));
+            workbook.write(fos);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            IOUtils.closeQuietly(fos);
+        }
     }
 
     @Override

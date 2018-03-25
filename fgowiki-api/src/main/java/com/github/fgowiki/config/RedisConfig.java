@@ -1,4 +1,4 @@
-package com.github.fgowiki.springConfig;
+package com.github.fgowiki.config;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;

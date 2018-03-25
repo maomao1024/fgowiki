@@ -1,9 +1,12 @@
 package com.github.fgowiki.api.entity;
 
+import com.github.fgowiki.core.bean.BaseEntity;
 import lombok.Data;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 /**
  * 功能描述：
@@ -14,7 +17,7 @@ import java.io.Serializable;
  */
 @Entity
 @Data
-public class FgoServant implements Serializable {
+public class FgoServant extends BaseEntity {
     @Id
     private Integer id;
     private String nameZh;
@@ -52,8 +55,8 @@ public class FgoServant implements Serializable {
     private String attributes;
     private String painter;
     private String cv;
-    private Integer height;
-    private Integer weight;
+    private String height;
+    private String weight;
     private String origin;
 
 }

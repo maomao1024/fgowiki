@@ -1,5 +1,6 @@
 package com.github.fgowiki.api.entity;
 
+import com.github.fgowiki.core.bean.BaseEntity;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import javax.persistence.*;
  */
 @Entity
 @Data
-public class FgoCamp {
+public class FgoCamp extends BaseEntity {
     @Id
     private Integer id;
     private String name;
