@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 
@@ -59,7 +60,7 @@ public class ControllerInterceptor {
 			// 继续执行被拦截的方法
 			result = pjp.proceed();
 		} catch (Throwable e) {
-			result = handlerException(pjp, e);
+			throw new RuntimeException(e);
 		}
 		long costMs = System.currentTimeMillis() - beginTime;
 		log.info("请求结束，URL：{}，耗时：{}ms", request.getRequestURL(), costMs);
@@ -72,20 +73,6 @@ public class ControllerInterceptor {
 		return Joiner.on(",").withKeyValueSeparator("=").join(map);
 	}
 
-	private ResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
-		ResultBean<?> result = new ResultBean();
-		if (e instanceof CheckException) {
-			result.setMsg(e.getMessage());
-			result.setCode(ResultBean.FAIL);
-		} else if (e instanceof UnloginException) {
-			result.setMsg("Unlogin");
-			result.setCode(ResultBean.NO_LOGIN);
-		} else {
-			log.error(pjp.getSignature() + " error ", e);
-			result.setMsg(e.toString());
-			result.setCode(ResultBean.FAIL);
-		}
-		return result;
-	}
+
 
 }

@@ -34,8 +34,8 @@ public class CacheController {
 	 * @return
 	 */
 	@GetMapping("/names")
-	public ResultBean<Collection<String>> index() {
-		return new ResultBean<>(cacheManager.getCacheNames());
+	public Collection<String> index() {
+		return cacheManager.getCacheNames();
 	}
 
 	/**
@@ -45,10 +45,10 @@ public class CacheController {
 	 * @return
 	 */
 	@PostMapping("/clear")
-	public ResultBean<Boolean> clear(@RequestParam String name) {
+	public Boolean clear(@RequestParam String name) {
 		log.info("clear cache : {}", name);
 		cacheManager.getCache(name).clear();
-		return new ResultBean<>(true);
+		return true;
 	}
 
 	/**
@@ -57,14 +57,14 @@ public class CacheController {
 	 * @return
 	 */
 	@PostMapping("/clearAll")
-	public ResultBean<Boolean> clearAll() {
+	public Boolean clearAll() {
 		log.info("clear all cache ...");
 		Collection<String> cacheNames = cacheManager.getCacheNames();
 		for (String name : cacheNames) {
 			log.info("clear cache : {}", name);
 			cacheManager.getCache(name).clear();
 		}
-		return new ResultBean<>(true);
+		return true;
 	}
 
 }

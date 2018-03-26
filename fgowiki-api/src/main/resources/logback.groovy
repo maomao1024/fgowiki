@@ -44,4 +44,5 @@ appender("dailyRollingFileAppender", RollingFileAppender) {
         pattern = "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n"
     }
 }
-root(INFO, ["CONSOLE", "dailyRollingFileAppender"])
+//root(INFO, ["CONSOLE", "dailyRollingFileAppender"])
+root(INFO, ["CONSOLE"])

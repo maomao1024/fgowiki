@@ -32,7 +32,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @param pageSize 分页大小
 	 * @return
 	 */
-	public ResultBean<List<T>> getList(Integer pageNum, Integer pageSize) {
+	public Page<T> getList(Integer pageNum, Integer pageSize) {
 		LinkedHashMap<String, Sort.Direction> sorts = new LinkedHashMap<>();
 		sorts.put("id", Sort.Direction.ASC);
 		return getList(pageNum, pageSize, sorts);
@@ -47,7 +47,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @return 分页数据
 	 * @see Sort.Direction
 	 */
-	public ResultBean<List<T>> getList(Integer pageNum, Integer pageSize, LinkedHashMap<String, Sort.Direction> sorts) {
+	public Page<T> getList(Integer pageNum, Integer pageSize, LinkedHashMap<String, Sort.Direction> sorts) {
 		Sort sort = null;
 		if (sorts != null && sorts.size() > 0) {
 			List<Sort.Order> orderList = new ArrayList<>();
@@ -55,11 +55,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 			sort = new Sort(orderList);
 		}
 		PageRequest pageRequest = new PageRequest((pageNum == null || pageNum < 0) ? 0 : pageNum, (pageSize == null || pageSize < 0) ? DEFAULT_PAGE_SIZE : pageSize, sort);
-		Page<T> page = getDao().findAll(pageRequest);
-		ResultBean<List<T>> results = new ResultBean<>(page.getContent());
-		results.setPageNum(page.getNumber());
-		results.setToatlSize(page.getTotalElements());
-		return results;
+		return getDao().findAll(pageRequest);
 	}
 
 	/**
@@ -68,7 +64,7 @@ public abstract class BaseService<T, ID extends Serializable> {
 	 * @param id
 	 * @return
 	 */
-	public ResultBean<T> get(ID id) {
-		return new ResultBean<>(getDao().findOne(id));
+	public T get(ID id) {
+		return getDao().findOne(id);
 	}
 }

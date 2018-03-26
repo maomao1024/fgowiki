@@ -14,6 +14,5 @@ import org.springframework.cache.annotation.Cacheable;
 public interface ServantDao extends BaseDao<FgoServant,Integer> {
 
     @Override
-    @Cacheable(value = "servant")
     FgoServant getOne(Integer integer);
 }

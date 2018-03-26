@@ -25,12 +25,12 @@ public class ServantController {
     private ServantService service;
 
     @GetMapping(value = "/{servantId}")
-    public ResultBean<FgoServant> getServant(@PathVariable("servantId") Integer servantId) {
+    public FgoServant getServant(@PathVariable("servantId") Integer servantId) {
         return service.get(servantId);
     }
 
     @GetMapping(value = "/")
-    public ResultBean<List<FgoServant>> getServantList(Integer pageNum, Integer pageSize) {
+    public Page<FgoServant> getServantList(Integer pageNum, Integer pageSize) {
         return service.getList(pageNum, pageSize);
     }
 }
