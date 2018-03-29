@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.github.fgowiki.api.entity.FgoUser;
 import com.github.fgowiki.api.service.UserService;
 import com.github.fgowiki.core.bean.ResultBean;
+import com.github.fgowiki.exception.CheckException;
 import com.github.fgowiki.exception.UnloginException;
 import com.github.fgowiki.utils.TokenUtils;
 import com.google.common.base.Strings;
@@ -47,11 +48,12 @@ public class LoginController {
             claims = TokenUtils.parse(token);
         } catch (Exception e) {
             template.delete(tokenKey);
-            throw e;
+            throw new CheckException("无效的token");
         }
-        if (claims.getExpiration().getTime() > System.currentTimeMillis()) {
+        if (System.currentTimeMillis() > claims.getExpiration().getTime()) {
             template.delete(tokenKey);
 	        token = TokenUtils.generateToken(user);
+	        template.opsForValue().set(tokenKey, token);
         }
         return new ResultBean<>(token);
     }

@@ -13,15 +13,15 @@ import org.springframework.context.annotation.Configuration;
  * @since 2018/3/27
  */
 @Configuration
-public class FilterConfig {
+public class JwtConfig {
 
 	@Bean
 	public FilterRegistrationBean filterRegistration() {
-		FilterRegistrationBean registration = new FilterRegistrationBean();
-		registration.setFilter(new JwtFilter());//添加过滤器
-		registration.addUrlPatterns("/*");//设置过滤路径，/*所有路径
-		registration.setName("jwtFilter");//设置优先级
-		registration.setOrder(1);//设置优先级
+		FilterRegistrationBean registration = new FilterRegistrationBean(new JwtFilter());
+		registration.addUrlPatterns("/*");
+		registration.setName("jwtFilter");
+		registration.setOrder(1);
+		registration.addInitParameter("exclusions","/login,*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
 		return registration;
 	}
 

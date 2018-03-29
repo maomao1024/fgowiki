@@ -1,5 +1,7 @@
 package com.github.fgowiki.filter;
 
+import com.alibaba.druid.util.PatternMatcher;
+import com.alibaba.druid.util.ServletPathMatcher;
 import com.github.fgowiki.exception.CheckException;
 import com.github.fgowiki.exception.UnloginException;
 import com.github.fgowiki.utils.TokenUtils;
@@ -16,6 +18,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 功能描述：
@@ -29,14 +34,15 @@ public class JwtFilter implements Filter {
 	private static final String AUTHORIZATION = "Authorization";
 	private static final String BEARER = "Bearer";
 
-	private String[] excludedPageArray={"login"};
+	private Set<String> excludesPattern;
+	protected PatternMatcher pathMatcher = new ServletPathMatcher();
 
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		String excludedPages = filterConfig.getInitParameter("EXCLUDED_PAGES");
-		if (!Strings.isNullOrEmpty(excludedPages)) { // 例外页面不为空
-			excludedPageArray = excludedPages.split(String.valueOf(';'));
+		String exclusions = filterConfig.getInitParameter("exclusions");
+		if (exclusions != null && exclusions.trim().length() != 0) {
+			excludesPattern = new HashSet<>(Arrays.asList(exclusions.split("\\s*,\\s*")));
 		}
 	}
 
@@ -44,7 +50,7 @@ public class JwtFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
-		if(isExcludedPage(httpRequest)){
+		if(isExclusion(httpRequest.getRequestURI())){
 			chain.doFilter(request, response);
 			return;
 		}
@@ -60,13 +66,15 @@ public class JwtFilter implements Filter {
 
 	@Override
 	public void destroy() {
-		this.excludedPageArray = null;
 	}
 
-	private boolean isExcludedPage(HttpServletRequest request){
-		for (String page : excludedPageArray) {// 遍历例外url数组
-			// 判断当前URL是否与例外页面相同
-			if(request.getServletPath().replaceAll("/","").equals(page)){ // 从第2个字符开始取（把前面的/去掉）
+	public boolean isExclusion(String requestURI) {
+		if (excludesPattern == null) {
+			return false;
+		}
+		requestURI = requestURI.replaceAll("[/]+", "/");
+		for (String pattern : excludesPattern) {
+			if (pathMatcher.matches(pattern, requestURI)) {
 				return true;
 			}
 		}

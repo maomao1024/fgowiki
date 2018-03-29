@@ -2,16 +2,20 @@ package com.github.fgowiki.config;
 
 import com.alibaba.druid.support.http.StatViewServlet;
 import com.alibaba.druid.support.http.WebStatFilter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * @author jiang
  * @create 2018-03-26 18:24
  **/
 @Configuration
+@Component
+@ConfigurationProperties(prefix = "durid")
 public class DruidConfig {
 
     @Bean
@@ -30,12 +34,9 @@ public class DruidConfig {
 
     @Bean
     public FilterRegistrationBean statFilter(){
-        //创建过滤器
-        FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean(new WebStatFilter());
-        //设置过滤器过滤路径
-        filterRegistrationBean.addUrlPatterns("/*");
-        //忽略过滤的形式
-        filterRegistrationBean.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
-        return filterRegistrationBean;
+        FilterRegistrationBean registration = new FilterRegistrationBean(new WebStatFilter());
+        registration.addUrlPatterns("/*");
+        registration.addInitParameter("exclusions","*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*");
+        return registration;
     }
 }
