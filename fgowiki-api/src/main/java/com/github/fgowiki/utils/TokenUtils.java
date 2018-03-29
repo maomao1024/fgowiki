@@ -3,6 +3,7 @@ package com.github.fgowiki.utils;
 import com.github.fgowiki.api.entity.FgoUser;
 import com.github.fgowiki.api.entity.SysConfig;
 import com.github.fgowiki.api.service.ConfigService;
+import com.github.fgowiki.exception.CheckException;
 import com.github.fgowiki.exception.UnloginException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -18,7 +19,7 @@ import java.util.Date;
 public abstract class TokenUtils {
 
     private static final String TOKEN_EXPIRATION = "token_expiration";
-    private static final String TOKEN_SECRET_KEY = "token_secret_key";
+	private static final String TOKEN_SECRET_KEY = "token_secret_key";
 
     private static ConfigService configService;
 
@@ -28,7 +29,7 @@ public abstract class TokenUtils {
 
     public static String generateToken(FgoUser user) {
         if (user == null) {
-            throw new UnloginException("未登录,请重新登录");
+	        throw new UnloginException("请重新登录");
         }
         SysConfig expiration = configService.getSysConfig(TOKEN_EXPIRATION);
         SysConfig secretKey = configService.getSysConfig(TOKEN_SECRET_KEY);
@@ -46,8 +47,10 @@ public abstract class TokenUtils {
 
     public static Claims parse(String token) {
         SysConfig secretKey = configService.getSysConfig(TOKEN_SECRET_KEY);
-        return Jwts.parser()
-                .setSigningKey(secretKey.getValue())
-                .parseClaimsJws(token).getBody();
+	    try {
+		    return Jwts.parser().setSigningKey(secretKey.getValue()).parseClaimsJws(token).getBody();
+	    } catch (Exception e) {
+		    throw new CheckException("无效的token");
+	    }
     }
 }

@@ -5,3 +5,4 @@
 */node_modules/
 */dist/
 hibernate.cfg.xml
+!/fgowiki-api/src/main/java/com/github/fgowiki/api/service/ServantService.java

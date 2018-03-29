@@ -38,7 +38,8 @@ public class ExpectionInterceptor {
     public Object Interceptor(ProceedingJoinPoint pjp) {
         Object result;
         try {
-            result = handlerResponse(pjp.proceed());
+	        result=pjp.proceed();
+            //result = handlerResponse(pjp.proceed());
         } catch (Throwable e) {
             result = handlerException(pjp, e);
         }

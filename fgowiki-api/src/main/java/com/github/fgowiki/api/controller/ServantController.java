@@ -30,7 +30,11 @@ public class ServantController {
     }
 
     @GetMapping(value = "/")
-    public Page<FgoServant> getServantList(Integer pageNum, Integer pageSize) {
-        return service.getList(pageNum, pageSize);
+    public ResultBean<List<FgoServant>> getServantList(Integer pageNum, Integer pageSize) {
+	    Page<FgoServant> page = service.getList(pageNum, pageSize);
+	    ResultBean<List<FgoServant>> result = new ResultBean<>(page.getContent());
+	    result.setPageNum(page.getNumber());
+	    result.setToatlSize(page.getTotalElements());
+	    return result;
     }
 }

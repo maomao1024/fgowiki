@@ -33,9 +33,10 @@ router.beforeEach((to, from, next) => {
     //NProgress.start();
     if (to.path === '/login') {
         sessionStorage.removeItem('user');
+        localStorage.removeItem('JWT_TOKEN');
     }
-    let user = JSON.parse(sessionStorage.getItem('user'));
-    if (!user && to.path !== '/login') {
+    let token = localStorage.getItem('JWT_TOKEN');
+    if (!token && to.path !== '/login') {
         next({path: '/login'})
     } else {
         next()
@@ -46,7 +47,7 @@ router.beforeEach((to, from, next) => {
 axios.interceptors.request.use(
     config => {
         if (localStorage.JWT_TOKEN) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
-            config.headers.Authorization = `token ${localStorage.JWT_TOKEN}`;
+            config.headers.Authorization = `Bearer ${localStorage.JWT_TOKEN}`;
         }
         return config;
     },
@@ -58,10 +59,11 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         if (response.data && response.data.code !== success) {
-            this.$message({
+        	alert(response.data.message);
+           /* this.$message({
                 message: response.data.code,
                 type: 'error'
-            });
+            });*/
             if (response.data.code === no_login) {
                 store.commit('LOG_OUT');
                 router.replace({

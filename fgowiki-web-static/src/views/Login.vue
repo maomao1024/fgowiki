@@ -61,7 +61,8 @@
                   type: 'error'
                 });
               } else {
-                sessionStorage.setItem('user', JSON.stringify(data));
+              	localStorage.setItem('JWT_TOKEN', data.token);
+                sessionStorage.setItem('user', JSON.stringify(data.user));
                 this.$router.push({ path: '/table' });
               }
             });

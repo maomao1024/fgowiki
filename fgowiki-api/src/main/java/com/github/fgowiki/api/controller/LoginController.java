@@ -15,9 +15,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import sun.rmi.log.LogOutputStream;
-
-import java.text.SimpleDateFormat;
 
 /**
  * 功能描述：
@@ -50,15 +47,15 @@ public class LoginController {
             claims = TokenUtils.parse(token);
         } catch (Exception e) {
             template.delete(tokenKey);
-            throw new UnloginException("请重新登录");
+            throw e;
         }
         if (claims.getExpiration().getTime() > System.currentTimeMillis()) {
             template.delete(tokenKey);
-            throw new UnloginException("请重新登录");
+	        token = TokenUtils.generateToken(user);
         }
         JSONObject obj = new JSONObject();
         obj.put("token", token);
-        obj.put("username", user.getUsername());
+        obj.put("user", user);
         obj.put("expiration", claims.getExpiration().getTime());
         return new ResultBean<>(obj);
     }
