@@ -39,21 +39,24 @@ public class ExpectionInterceptor {
     public Object Interceptor(ProceedingJoinPoint pjp) {
         Object result;
         try {
-	        result=pjp.proceed();
+            result = pjp.proceed();
             //result = handlerResponse(pjp.proceed());
         } catch (Throwable e) {
-            result = handlerException(pjp, e.getCause());
+            result = handlerException(pjp, e);
         }
         return result;
     }
 
     private ResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
+        if (e.getCause() != null) {
+            e = e.getCause();
+        }
         ResultBean<?> result = new ResultBean();
         if (e instanceof CheckedException) {
             result.setMsg(e.getMessage());
             result.setCode(ResultBean.FAIL);
         } else if (e instanceof UnloginException) {
-	        ResponseUtils.setUnLoginStatus();
+            ResponseUtils.setUnLoginStatus();
             result.setMsg("Unlogin");
             result.setCode(ResultBean.NO_LOGIN);
         } else {

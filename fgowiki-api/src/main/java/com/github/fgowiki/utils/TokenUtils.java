@@ -71,7 +71,7 @@ public abstract class TokenUtils {
             }
             return claims;
         } catch (Exception e) {
-            throw new CheckedException("无效的token");
+            throw new UnloginException("无效的token");
         }
     }
 }
