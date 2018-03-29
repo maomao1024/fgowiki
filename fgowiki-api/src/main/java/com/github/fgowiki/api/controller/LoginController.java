@@ -34,7 +34,7 @@ public class LoginController {
     private RedisTemplate<String, String> template;
 
     @PostMapping(path = "/login")
-    public ResultBean<JSONObject> login(@RequestBody FgoUser user) throws Exception {
+    public ResultBean<String> login(@RequestBody FgoUser user) throws Exception {
         user = userService.getUser(user);
         String tokenKey = "userToken" + user.getUid();
         String token = template.opsForValue().get(tokenKey);
@@ -53,11 +53,7 @@ public class LoginController {
             template.delete(tokenKey);
 	        token = TokenUtils.generateToken(user);
         }
-        JSONObject obj = new JSONObject();
-        obj.put("token", token);
-        obj.put("user", user);
-        obj.put("expiration", claims.getExpiration().getTime());
-        return new ResultBean<>(obj);
+        return new ResultBean<>(token);
     }
 
 }

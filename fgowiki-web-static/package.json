@@ -1,9 +1,7 @@
 {
-  "name": "vueadmin",
+  "name": "fgowiki",
   "version": "1.0.5",
-  "description": "vue admin project",
-  "author": "taylor <709161610@qq.com>",
-  "license": "MIT",
+  "description": "fgowiki project",
   "scripts": {
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
@@ -14,6 +12,7 @@
     "echarts": "^3.3.2",
     "element-ui": "^1.2.8",
     "font-awesome": "^4.7.0",
+    "js-base64": "^2.4.3",
     "nprogress": "^0.2.0",
     "vue": "^2.2.2",
     "vue-router": "^2.3.0",

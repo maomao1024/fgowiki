@@ -109,7 +109,8 @@
 				this.$confirm('确认退出吗?', '提示', {
 					//type: 'warning'
 				}).then(() => {
-					sessionStorage.removeItem('fgoUser');
+					sessionStorage.removeItem('user');
+					localStorage.removeItem('JWT_TOKEN');
 					_this.$router.push('/login');
 				}).catch(() => {
 
@@ -126,7 +127,7 @@
 			}
 		},
 		mounted() {
-			var fgoUser = sessionStorage.getItem('fgoUser');
+			var fgoUser = sessionStorage.getItem('user');
 			if (fgoUser) {
 				fgoUser = JSON.parse(fgoUser);
 				this.sysUserName = fgoUser.username || '';

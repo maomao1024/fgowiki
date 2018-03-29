@@ -1,5 +1,6 @@
 package com.github.fgowiki.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.github.fgowiki.api.entity.FgoUser;
 import com.github.fgowiki.api.entity.SysConfig;
 import com.github.fgowiki.api.service.ConfigService;
@@ -9,7 +10,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-import javax.crypto.SecretKey;
 import java.util.Date;
 
 /**
@@ -36,8 +36,7 @@ public abstract class TokenUtils {
         return Jwts
                 .builder()
                 .setSubject("user")
-                .claim("roles", user.getRoles())
-                .claim("id", user.getUid())
+                .claim("user", JSON.toJSONString(user))
                 .setIssuedAt(new Date())
                 .setIssuer("fgowiki")
                 .setExpiration(new Date(System.currentTimeMillis() + Long.valueOf(expiration.getValue())))

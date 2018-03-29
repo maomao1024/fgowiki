@@ -17,6 +17,7 @@
 
 <script>
   import { requestLogin } from '../api/api';
+  let Base64 = require('js-base64').Base64;
   //import NProgress from 'nprogress'
   export default {
     data() {
@@ -53,7 +54,6 @@
             var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
             requestLogin(loginParams).then(response => {
               this.logining = false;
-              //NProgress.done();
               let { msg, code, data } = response;
               if (code !== 0) {
                 this.$message({
@@ -61,8 +61,8 @@
                   type: 'error'
                 });
               } else {
-              	localStorage.setItem('JWT_TOKEN', data.token);
-                sessionStorage.setItem('user', JSON.stringify(data.user));
+              	localStorage.setItem('JWT_TOKEN', data);
+                sessionStorage.setItem('user', Base64.decode(data.split('\.')[1]));
                 this.$router.push({ path: '/table' });
               }
             });

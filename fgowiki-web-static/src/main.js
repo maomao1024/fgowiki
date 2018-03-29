@@ -57,14 +57,16 @@ axios.interceptors.request.use(
 
 // http response 拦截器
 axios.interceptors.response.use(
-    response => {
+    /*response => {
         if (response.data && response.data.code !== success) {
         	alert(response.data.message);
-           /* this.$message({
+           /!* this.$message({
                 message: response.data.code,
                 type: 'error'
-            });*/
+            });*!/
             if (response.data.code === no_login) {
+	            sessionStorage.removeItem('user');
+	            localStorage.removeItem('JWT_TOKEN');
                 store.commit('LOG_OUT');
                 router.replace({
                     path: 'login',
@@ -74,7 +76,10 @@ axios.interceptors.response.use(
         } else {
             return response;
         }
-    },
+    },*/
+	response => {
+		return response;
+	},
     error => {
         if (error.response) {
             console.log('axios:' + error.response.status);
