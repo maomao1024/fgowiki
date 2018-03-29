@@ -10,12 +10,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
+ * druid监控配置
+ *
  * @author jiang
  * @create 2018-03-26 18:24
  **/
 @Configuration
 @Component
-@ConfigurationProperties(prefix = "durid")
 public class DruidConfig {
 
     @Bean

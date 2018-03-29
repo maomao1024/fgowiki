@@ -6,13 +6,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * 功能描述：
+ * 功能描述：jwt配置
  *
  * @author 蒋经
  * @version 1.0
  * @since 2018/3/27
  */
-@Configuration
+@Deprecated
 public class JwtConfig {
 
 	@Bean

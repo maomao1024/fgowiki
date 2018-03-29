@@ -57,27 +57,11 @@ axios.interceptors.request.use(
 
 // http response 拦截器
 axios.interceptors.response.use(
-    /*response => {
-        if (response.data && response.data.code !== success) {
-        	alert(response.data.message);
-           /!* this.$message({
-                message: response.data.code,
-                type: 'error'
-            });*!/
-            if (response.data.code === no_login) {
-	            sessionStorage.removeItem('user');
-	            localStorage.removeItem('JWT_TOKEN');
-                store.commit('LOG_OUT');
-                router.replace({
-                    path: 'login',
-                    query: {redirect: router.currentRoute.fullPath}
-                });
-            }
-        } else {
-            return response;
-        }
-    },*/
 	response => {
+        let authorization = response.headers.Authorization || response.headers.authorization;
+        if(authorization&&authorization.startsWith('RefreshToken ')){
+	        localStorage.setItem('JWT_TOKEN',authorization.split(' ')[1]);
+        }
 		return response;
 	},
     error => {

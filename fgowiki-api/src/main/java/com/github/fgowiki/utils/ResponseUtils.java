@@ -1,6 +1,7 @@
 package com.github.fgowiki.utils;
 
 import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,11 +15,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class ResponseUtils {
 
-	public static HttpServletResponse getResponse() {
-		return ((ServletWebRequest) RequestContextHolder.getRequestAttributes()).getResponse();
-	}
+    public static HttpServletResponse getResponse() {
+        return ((ServletRequestAttributes)RequestContextHolder.getRequestAttributes()).getResponse();
+    }
 
-	public static void setUnLoginStatus() {
-		getResponse().setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-	}
+    public static void setUnLoginStatus() {
+        getResponse().setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    }
+
+    public static void setHeader(String name, String value) {
+        getResponse().setHeader(name, value);
+    }
 }

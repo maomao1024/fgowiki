@@ -2,11 +2,9 @@ package com.github.fgowiki.filter;
 
 import com.alibaba.druid.util.PatternMatcher;
 import com.alibaba.druid.util.ServletPathMatcher;
-import com.github.fgowiki.exception.CheckException;
 import com.github.fgowiki.exception.UnloginException;
 import com.github.fgowiki.utils.TokenUtils;
 import com.google.common.base.Strings;
-import org.springframework.core.annotation.Order;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -14,8 +12,6 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Arrays;
@@ -29,6 +25,7 @@ import java.util.Set;
  * @version 1.0
  * @since 2018/3/27
  */
+@Deprecated
 public class JwtFilter implements Filter {
 
 	private static final String AUTHORIZATION = "Authorization";

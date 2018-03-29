@@ -4,6 +4,8 @@ import com.github.fgowiki.api.dao.ConfigDao;
 import com.github.fgowiki.api.entity.SysConfig;
 import com.github.fgowiki.core.dao.BaseDao;
 import com.github.fgowiki.core.service.BaseService;
+import com.github.fgowiki.exception.CheckedException;
+import com.google.common.base.Strings;
 import javafx.beans.binding.When;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
@@ -25,17 +27,11 @@ public class ConfigService extends BaseService<SysConfig, Integer> {
     }
 
 	@Cacheable(value = "config")
-	public SysConfig getSysConfig(String configName) {
-		SysConfig sysConfig = new SysConfig();
-		switch (configName) {
-			case "token_expiration":
-				sysConfig.setValue("7200000");
-				break;
-			case "token_secret_key":
-				sysConfig.setValue("fgowiki");
-				break;
+	public String getSysConfig(String configName) {
+		String config = dao.getSysConfig(configName);
+		if(Strings.isNullOrEmpty(config)){
+			throw new CheckedException("系统参数:"+config+"不存在");
 		}
-		return sysConfig;
-		//return dao.getSysConfig(configName);
+		return config;
 	}
 }

@@ -7,10 +7,10 @@ import java.nio.charset.Charset
 import static ch.qos.logback.classic.Level.INFO
 import static ch.qos.logback.classic.Level.TRACE
 
-def USER_HOME = System.getProperty("user.home")
-def APP_NAME = "fgowki-api"
-def LOG_FILE = "${USER_HOME}/logs/${APP_NAME}.log"
-def FILE_NAME_PATTERN = "${APP_NAME}.%d{yyyy-MM-dd}.log"
+def APP_HOME = System.getProperty("user.home") + "/var/apps/fgowiki/"
+def APP_NAME = "fgowiki-api"
+def LOG_FILE = "${APP_HOME}/logs/${APP_NAME}.log"
+def FILE_NAME_PATTERN = "${APP_HOME}/logs/${APP_NAME}.%d{yyyy-MM-dd}.log"
 
 scan("60 seconds")
 
@@ -26,7 +26,7 @@ logger("com.github.fgowiki", INFO)
 conversionRule("clr", ColorConverter)
 appender("CONSOLE", ConsoleAppender) {
     encoder(PatternLayoutEncoder) {
-        pattern =  "%clr(%d{HH:mm:ss.SSS}){faint} %clr(%-5level) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n"
+        pattern = "%clr(%d{HH:mm:ss.SSS}){faint} %clr(%-5level) %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n"
         charset = Charset.forName("utf8")
     }
 }
@@ -44,5 +44,5 @@ appender("dailyRollingFileAppender", RollingFileAppender) {
         pattern = "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg %n"
     }
 }
-//root(INFO, ["CONSOLE", "dailyRollingFileAppender"])
-root(INFO, ["CONSOLE"])
+root(INFO, ["CONSOLE", "dailyRollingFileAppender"])
+//root(INFO, ["CONSOLE"])

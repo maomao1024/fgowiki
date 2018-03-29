@@ -1,7 +1,7 @@
 package com.github.fgowiki.interceptor;
 
 import com.github.fgowiki.core.bean.ResultBean;
-import com.github.fgowiki.exception.CheckException;
+import com.github.fgowiki.exception.CheckedException;
 import com.github.fgowiki.exception.UnloginException;
 import com.github.fgowiki.utils.ResponseUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -49,7 +49,7 @@ public class ExpectionInterceptor {
 
     private ResultBean<?> handlerException(ProceedingJoinPoint pjp, Throwable e) {
         ResultBean<?> result = new ResultBean();
-        if (e instanceof CheckException) {
+        if (e instanceof CheckedException) {
             result.setMsg(e.getMessage());
             result.setCode(ResultBean.FAIL);
         } else if (e instanceof UnloginException) {

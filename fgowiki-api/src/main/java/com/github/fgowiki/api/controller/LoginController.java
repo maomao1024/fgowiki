@@ -1,11 +1,9 @@
 package com.github.fgowiki.api.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.github.fgowiki.api.entity.FgoUser;
 import com.github.fgowiki.api.service.UserService;
 import com.github.fgowiki.core.bean.ResultBean;
-import com.github.fgowiki.exception.CheckException;
-import com.github.fgowiki.exception.UnloginException;
+import com.github.fgowiki.exception.CheckedException;
 import com.github.fgowiki.utils.TokenUtils;
 import com.google.common.base.Strings;
 import io.jsonwebtoken.Claims;
@@ -48,7 +46,7 @@ public class LoginController {
             claims = TokenUtils.parse(token);
         } catch (Exception e) {
             template.delete(tokenKey);
-            throw new CheckException("无效的token");
+            throw new CheckedException("无效的token");
         }
         if (System.currentTimeMillis() > claims.getExpiration().getTime()) {
             template.delete(tokenKey);

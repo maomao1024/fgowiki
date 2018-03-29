@@ -16,6 +16,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * redis配置
+ * @author jiang
+ * @create 2018/1/21 19:55
+ **/
 @Configuration
 public class RedisConfig extends CachingConfigurerSupport {
 

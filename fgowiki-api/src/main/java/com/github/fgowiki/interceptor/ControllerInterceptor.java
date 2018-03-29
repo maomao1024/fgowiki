@@ -1,8 +1,5 @@
 package com.github.fgowiki.interceptor;
 
-import com.github.fgowiki.core.bean.ResultBean;
-import com.github.fgowiki.exception.CheckException;
-import com.github.fgowiki.exception.UnloginException;
 import com.github.fgowiki.utils.RequestUtils;
 import com.google.common.base.Joiner;
 import lombok.extern.slf4j.Slf4j;
@@ -11,7 +8,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 

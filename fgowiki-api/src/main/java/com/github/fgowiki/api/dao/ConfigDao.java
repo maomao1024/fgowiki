@@ -10,6 +10,6 @@ import org.springframework.data.jpa.repository.Query;
  **/
 public interface ConfigDao extends BaseDao<SysConfig, Integer> {
 
-    @Query("select t from SysConfig  t where t.name=?1 and t.yxbz=1")
-    SysConfig getSysConfig(String configName);
+    @Query("select t.value from SysConfig  t where t.name=?1 and t.yxbz=1")
+    String getSysConfig(String configName);
 }
