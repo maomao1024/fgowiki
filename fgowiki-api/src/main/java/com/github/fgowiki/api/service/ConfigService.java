@@ -26,12 +26,12 @@ public class ConfigService extends BaseService<SysConfig, Integer> {
         return dao;
     }
 
-	@Cacheable(value = "config")
-	public String getSysConfig(String configName) {
-		String config = dao.getSysConfig(configName);
-		if(Strings.isNullOrEmpty(config)){
-			throw new CheckedException("系统参数:"+config+"不存在");
-		}
-		return config;
-	}
+    @Cacheable(value = "config",key ="#configName")
+    public String getSysConfig(String configName) {
+        String config = dao.getSysConfig(configName);
+        if (Strings.isNullOrEmpty(config)) {
+            throw new CheckedException("系统参数:" + config + "不存在");
+        }
+        return config;
+    }
 }

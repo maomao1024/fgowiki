@@ -63,7 +63,7 @@
               } else {
               	localStorage.setItem('JWT_TOKEN', data);
                 sessionStorage.setItem('user', Base64.decode(data.split('\.')[1]));
-                this.$router.push({ path: '/table' });
+                this.$router.push('/servant');
               }
             });
           } else {

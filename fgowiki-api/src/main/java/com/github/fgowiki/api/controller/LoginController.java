@@ -50,8 +50,8 @@ public class LoginController {
         }
         if (System.currentTimeMillis() > claims.getExpiration().getTime()) {
             template.delete(tokenKey);
-	        token = TokenUtils.generateToken(user);
-	        template.opsForValue().set(tokenKey, token);
+            token = TokenUtils.generateToken(user);
+            template.opsForValue().set(tokenKey, token);
         }
         return new ResultBean<>(token);
     }

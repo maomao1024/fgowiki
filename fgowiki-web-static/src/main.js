@@ -57,8 +57,8 @@ axios.interceptors.request.use(
 
 // http response 拦截器
 axios.interceptors.response.use(
-	response => {
-	    if(response.data.code===no_login){
+    response => {
+        if (response.data.code === no_login) {
             sessionStorage.removeItem('user');
             localStorage.removeItem('JWT_TOKEN');
             store.commit('LOG_OUT');
@@ -68,11 +68,11 @@ axios.interceptors.response.use(
             });
         }
         let authorization = response.headers.Authorization || response.headers.authorization;
-        if(authorization&&authorization.startsWith('RefreshToken ')){
-	        localStorage.setItem('JWT_TOKEN',authorization.split(' ')[1]);
+        if (authorization && authorization.startsWith('RefreshToken ')) {
+            localStorage.setItem('JWT_TOKEN', authorization.split(' ')[1]);
         }
-		return response;
-	},
+        return response;
+    },
     error => {
         if (error.response) {
             console.log('axios:' + error.response.status);
