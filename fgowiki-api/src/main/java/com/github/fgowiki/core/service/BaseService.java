@@ -3,6 +3,7 @@ package com.github.fgowiki.core.service;
 import com.github.fgowiki.core.bean.ResultBean;
 import com.github.fgowiki.core.dao.BaseDao;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -19,6 +20,7 @@ import java.util.List;
  * @version 1.0
  * @since 2017/12/22
  */
+@EnableCaching
 public abstract class BaseService<T, ID extends Serializable> {
 
 	private static final int DEFAULT_PAGE_SIZE = 10;

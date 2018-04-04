@@ -25,8 +25,8 @@ public class ServantController {
     private ServantService service;
 
     @GetMapping(value = "/{servantId}")
-    public FgoServant getServant(@PathVariable("servantId") Integer servantId) {
-        return service.get(servantId);
+    public ResultBean<FgoServant> getServant(@PathVariable("servantId") Integer servantId) {
+        return new ResultBean<>(service.get(servantId));
     }
 
     @GetMapping(value = "/")
