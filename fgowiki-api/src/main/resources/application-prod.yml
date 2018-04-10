@@ -2,7 +2,7 @@ spring:
     datasource:
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/fgowiki
+        url: jdbc:mysql://172.17.0.1:3306/fgowiki
         username: fgowiki
         password: 123456
         druid:
@@ -34,7 +34,7 @@ spring:
                 strategy: org.hibernate.cfg.ImprovedNamingStrategy
     redis:
         database: 0
-        host: 127.0.0.1
+        host: 172.17.0.1
         password: fgowiki456
         pool:
             max-active: 8
