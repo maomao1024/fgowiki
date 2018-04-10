@@ -7,7 +7,7 @@ import java.nio.charset.Charset
 import static ch.qos.logback.classic.Level.INFO
 import static ch.qos.logback.classic.Level.TRACE
 
-def APP_HOME = System.getProperty("user.home") + "/var/apps/fgowiki/"
+def APP_HOME = "/var/apps/fgowiki/"
 def APP_NAME = "fgowiki-api"
 def LOG_FILE = "${APP_HOME}/logs/${APP_NAME}.log"
 def FILE_NAME_PATTERN = "${APP_HOME}/logs/${APP_NAME}.%d{yyyy-MM-dd}.log"
