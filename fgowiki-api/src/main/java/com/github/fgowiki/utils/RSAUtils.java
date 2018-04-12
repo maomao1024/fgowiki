@@ -179,7 +179,7 @@ public abstract class RSAUtils {
         return getKey(keyMap, PUBLIC_KEY);
     }
 
-    private static final String[] PRIVATE_KEY_FORMAT = {"-----BEGIN RSA PRIVATE KEY-----", "-----BEGIN RSA PRIVATE KEY-----"};
+    private static final String[] PRIVATE_KEY_FORMAT = {"-----BEGIN RSA PRIVATE KEY-----", "-----END RSA PRIVATE KEY-----"};
     private static final String[] PUBLIC_KEY_FORMAT = {"-----BEGIN PUBLIC KEY-----", "-----END PUBLIC KEY-----"};
 
     /**
